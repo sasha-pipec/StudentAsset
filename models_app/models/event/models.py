@@ -12,12 +12,10 @@ class Event(models.Model):
 
     ON_MODERATION = 'Moderation'
     APPROVED = 'Approved'
-    REJECTED = 'Rejected'
 
     STATUS_CHOICES = (
         (ON_MODERATION, 'На модерации'),
         (APPROVED, 'Одобрено'),
-        (REJECTED, 'Отклонено'),
     )
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, verbose_name='Статус', default=ON_MODERATION)
     user = models.ForeignKey("User", on_delete=models.SET_NULL, verbose_name='Пользователь', null=True)
