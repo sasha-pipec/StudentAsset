@@ -7,6 +7,7 @@ class Event(models.Model):
 
     title = models.CharField(max_length=100, verbose_name="Заголовок")
     description = models.CharField(max_length=300, verbose_name="Описание")
+    date = models.DateTimeField(max_length=300, auto_now_add=True, blank=True, verbose_name="Предположительная дата")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Дата обновления')
 
