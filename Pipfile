@@ -12,6 +12,7 @@ psycopg2-binary = "*"
 django-service-objects = {editable = true, git = "https://github.com/dvkurbatov/django-service-objects.git"}
 pillow = "*"
 pipenv = "*"
+requests = "*"
 
 [dev-packages]
 
