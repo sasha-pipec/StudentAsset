@@ -10,4 +10,4 @@ class UserGetView(APIView):
 
     def get(self, request):
         outcome = ServiceOutcome(UserGetService, {**request.data})
-        return Response(UserGetSerializer(outcome.result, many=True).data, status=status.HTTP_200_OK)
+        return Response(UserGetSerializer(outcome.result).data, status=status.HTTP_200_OK)
