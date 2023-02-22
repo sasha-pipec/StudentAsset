@@ -9,15 +9,12 @@ from models_app.models import User, Event
 
 
 class EventCreateServices(ServiceWithResult):
-    title = forms.CharField(max_length=100)
+    title = forms.CharField(max_length=100, min_length=5)
     description = forms.CharField(max_length=100)
     date = forms.DateTimeField(required=False)
     user = ModelField(User)
 
-    custom_validations = ["validate_title_post", ]
-
     def process(self):
-        self.run_custom_validations()
         self.result = {
             "event": self._create_event,
             "selections": [],
@@ -42,13 +39,3 @@ class EventCreateServices(ServiceWithResult):
                         "event": self.result["event"],
                     }).result
                 )
-
-    def validate_title_post(self):
-        if len(self.cleaned_data.get('title')) < 5:
-            self.response_status = status.HTTP_400_BAD_REQUEST
-            raise ValidationError(message='Title too short (at least 5 characters)',
-                                  response_status=self.response_status)
-        elif len(self.cleaned_data.get('title')) > 100:
-            self.response_status = status.HTTP_400_BAD_REQUEST
-            raise ValidationError(message='Title too long (at least 100 characters)',
-                                  response_status=self.response_status)
