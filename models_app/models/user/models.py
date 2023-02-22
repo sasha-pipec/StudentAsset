@@ -36,6 +36,7 @@ class User(AbstractUser):
     role = models.CharField(max_length=20, choices=TYPE, default=student, verbose_name='Роль')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Дата обновления')
+    is_muted = models.BooleanField(default=False, verbose_name='Мут')
 
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = []
