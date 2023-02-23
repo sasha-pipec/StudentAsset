@@ -10,7 +10,7 @@ from api.services.event.create import EventCreateServices
 from api.services.event.approve import EventApproveServices
 from api.services.event.cancel import EventCancelServices
 from api.services.event.list import EventListServices
-from api.services.event.vote import EventVoteServices
+from api.services.vote.create import EventVoteServices
 
 
 class EventVoteView(APIView):
