@@ -4,6 +4,7 @@ from rest_framework.views import APIView
 from service_objects.services import ServiceOutcome
 from api.services.thread.create import ThreadCreateService
 from api.services.thread.show import ThreadShowService
+from api.services.thread.patch import ThreadUpdateService
 from api.serializers.thread.create import ThreadCreateSerializers
 
 
@@ -18,4 +19,9 @@ class ThreadRetrieveUpdateDestroyView(APIView):
 
     def get(self, request, *args, **kwargs):
         outcome = ServiceOutcome(ThreadShowService, kwargs | {'user': request.user})
+        return Response(ThreadCreateSerializers(outcome.result).data, status=status.HTTP_200_OK)
+
+    def patch(self, request, *args, **kwargs):
+        outcome = ServiceOutcome(ThreadUpdateService, kwargs |
+                                 {**request.data | request.POST.dict() | {'user': request.user}})
         return Response(ThreadCreateSerializers(outcome.result).data, status=status.HTTP_200_OK)
