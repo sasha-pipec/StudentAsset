@@ -8,11 +8,13 @@ class VoteAdmin(admin.ModelAdmin):
     fields = [
         "id",
         "selection",
+        "user",
     ]
     list_filter = ('selection', )
     list_display = [
         "id",
         "selection",
+        "user",
     ]
     readonly_fields = ["id", ]
     list_display_links = (
