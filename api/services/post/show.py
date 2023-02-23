@@ -2,6 +2,7 @@ import json
 
 from django import forms
 from django.core.paginator import Paginator
+from django.db.models import Count
 from service_objects.services import ServiceWithResult
 
 from conf.settings.rest_framework import REST_FRAMEWORK
@@ -36,4 +37,4 @@ class PostListServices(ServiceWithResult):
 
     @property
     def _events(self):
-        return Post.objects.all().order_by(self.cleaned_data["order"] or "id")
+        return Post.objects.all().order_by(self.cleaned_data["order"] or "id").annotate(total_likes=Count("voting_posts"))
