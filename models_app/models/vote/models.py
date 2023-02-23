@@ -9,7 +9,7 @@ class Vote(models.Model):
     selection = models.ForeignKey('Selection', on_delete=models.CASCADE, verbose_name='Выбор')
 
     def __str__(self):
-        return self.user
+        return self.user.username
 
     class Meta:
         db_table = 'votes'
