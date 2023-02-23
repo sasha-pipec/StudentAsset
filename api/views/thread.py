@@ -5,6 +5,7 @@ from service_objects.services import ServiceOutcome
 from api.services.thread.create import ThreadCreateService
 from api.services.thread.show import ThreadShowService
 from api.services.thread.patch import ThreadUpdateService
+from api.services.thread.delete import ThreadDeleteService
 from api.serializers.thread.create import ThreadCreateSerializers
 
 
@@ -25,3 +26,7 @@ class ThreadRetrieveUpdateDestroyView(APIView):
         outcome = ServiceOutcome(ThreadUpdateService, kwargs |
                                  {**request.data | request.POST.dict() | {'user': request.user}})
         return Response(ThreadCreateSerializers(outcome.result).data, status=status.HTTP_200_OK)
+
+    def delete(self, request, *args, **kwargs):
+        outcome = ServiceOutcome(ThreadDeleteService, kwargs | {'user': request.user})
+        return Response({"message": outcome.result}, status=status.HTTP_204_NO_CONTENT)
