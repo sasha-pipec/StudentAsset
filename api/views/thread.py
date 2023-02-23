@@ -10,7 +10,7 @@ from api.services.thread.list import ThreadListServices
 from api.serializers.thread.list import ThreadSerializers
 
 
-class ThreadCreateView(APIView):
+class ThreadListCreateView(APIView):
 
     def get(self, request):
         outcome = ServiceOutcome(ThreadListServices, {**request.query_params.dict() | {'user': request.user}})

@@ -7,7 +7,7 @@ from api.views.event import EventCreateListView
 from api.views.event import EventApproveView
 from api.views.event import EventCancelView
 from api.views.event import EventVoteView
-from api.views.thread import ThreadCreateView, ThreadRetrieveUpdateDestroyView
+from api.views.thread import ThreadListCreateView, ThreadRetrieveUpdateDestroyView
 
 urlpatterns = [
     # post
@@ -24,6 +24,6 @@ urlpatterns = [
     path('users/', UserGetView.as_view()),
 
     # threads
-    path('threads/', ThreadCreateView.as_view(), name="threads"),
+    path('threads/', ThreadListCreateView.as_view(), name="threads"),
     path('threads/<int:id>', ThreadRetrieveUpdateDestroyView.as_view()),
 ]
