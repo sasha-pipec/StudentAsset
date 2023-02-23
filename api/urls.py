@@ -1,5 +1,6 @@
 from django.urls import path
 
+from api.views.like import LikeCreateDeleteView
 from api.views.post import PostCreateListView
 from api.views.user import UserGetView
 from api.views.event import EventCreateListView
@@ -10,6 +11,7 @@ from api.views.event import EventVoteView
 urlpatterns = [
     # post
     path('posts/', PostCreateListView.as_view(), name="posts"),
+    path('posts/<int:id>/like_toggle/', LikeCreateDeleteView.as_view(), name="post_like"),
 
     # events
     path('events/', EventCreateListView.as_view(), name="events"),
