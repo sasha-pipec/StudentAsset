@@ -9,6 +9,7 @@ from models_app.models import Event
 
 
 class EventListServices(ServiceWithResult):
+    order = forms.CharField(required=False)
     filter = forms.CharField(required=False)
     page = forms.IntegerField(required=False, min_value=1)
     per_page = forms.IntegerField(required=False, min_value=1)
@@ -36,4 +37,6 @@ class EventListServices(ServiceWithResult):
 
     @property
     def _events(self):
-        return Event.objects.all().order_by(self.cleaned_data["filter"] or "id")
+        if self.cleaned_data.get('filter', None) == "Approved":
+            return Event.objects.filter(status=Event.APPROVED).order_by(self.cleaned_data["order"] or "id")
+        return Event.objects.all().order_by(self.cleaned_data["order"] or "id")
