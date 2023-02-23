@@ -5,6 +5,7 @@ from service_objects.services import ServiceOutcome
 
 from api.serializers.like.show import LikeShowSerializer
 from api.services.like.create import LikeCreateServices
+from api.services.like.delete import LikeDeleteServices
 
 
 class LikeCreateDeleteView(APIView):
@@ -14,4 +15,5 @@ class LikeCreateDeleteView(APIView):
         return Response(LikeShowSerializer(outcome.result).data, status=status.HTTP_200_OK)
 
     def delete(self, request, *args, **kwargs):
-        return Response({})
+        ServiceOutcome(LikeDeleteServices, kwargs | {"user": request.user})
+        return Response({"INFO": True}, status=status.HTTP_200_OK)
