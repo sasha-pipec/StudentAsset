@@ -6,10 +6,22 @@ from api.services.thread.create import ThreadCreateService
 from api.services.thread.show import ThreadShowService
 from api.services.thread.patch import ThreadUpdateService
 from api.services.thread.delete import ThreadDeleteService
+from api.services.thread.list import ThreadListServices
 from api.serializers.thread.list import ThreadSerializers
 
 
 class ThreadCreateView(APIView):
+
+    def get(self, request):
+        outcome = ServiceOutcome(ThreadListServices, {**request.query_params.dict() | {'user': request.user}})
+        return Response(
+            {
+                "Threads": ThreadSerializers(outcome.result.get('object_list'), many=True).data,
+                'page_data': outcome.result.get('page_range'),
+                'page_info': outcome.result.get('page_info'),
+            },
+            status=status.HTTP_200_OK
+        )
 
     def post(self, request):
         outcome = ServiceOutcome(ThreadCreateService, {**request.data | request.POST.dict() | {'user': request.user}})
