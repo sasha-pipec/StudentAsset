@@ -6,6 +6,10 @@ from service_objects.services import ServiceWithResult
 from models_app.models.user.models import User
 import requests
 
+ROLES = {
+    'Студент': User.student
+}
+
 
 class UserGetService(ServiceWithResult):
     username = forms.CharField()
@@ -35,7 +39,7 @@ class UserGetService(ServiceWithResult):
                 group=request['user']['groups'][0]['codename'],
                 first_name=request['user']['first_name'],
                 last_name=request['user']['last_name'],
-                role=request['role'],
+                role=ROLES.get(request['role'], User.student),
                 API_Key=request['token'],
             )
         raise NotFound(message='Invalid login or password', response_status=status.HTTP_400_BAD_REQUEST)
