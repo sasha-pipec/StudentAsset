@@ -13,7 +13,7 @@ from models_app.models import Event
 from models_app.models import User
 
 
-class EventApproveServices(ServiceWithResult):
+class EventCancelServices(ServiceWithResult):
     id = forms.IntegerField()
     user = ModelField(User)
 
@@ -22,14 +22,13 @@ class EventApproveServices(ServiceWithResult):
     def process(self):
         self.run_custom_validations()
         if self.is_valid():
-            self.result = self._event_approve
+            self.result = self._event_cancel
         return self
 
     @property
-    def _event_approve(self):
-        self._get_event.status = Event.APPROVED
-        self._get_event.save()
-        return f"Status event with id {self.cleaned_data['id']} changed successfully"
+    def _event_cancel(self):
+        self._get_event.delete()
+        return f"Event with id {self.cleaned_data['id']} was successfully rejected and deleted"
 
     @property
     @lru_cache
@@ -50,5 +49,6 @@ class EventApproveServices(ServiceWithResult):
 
     def check_event_status(self):
         if self._get_event.status == Event.APPROVED:
-            raise ValidationError(message="The event already has a status of approved",
+            raise ValidationError(message="The event has a status of approved",
                                   response_status=status.HTTP_400_BAD_REQUEST)
+

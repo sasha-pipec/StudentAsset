@@ -7,6 +7,7 @@ from api.serializers.event.list import EventListSerializer
 from api.serializers.selection.list import SelectionListSerializer
 from api.services.event.create import EventCreateServices
 from api.services.event.approve import EventApproveServices
+from api.services.event.cancel import EventCancelServices
 
 
 class EventCreateView(APIView):
@@ -26,4 +27,11 @@ class EventApproveView(APIView):
 
     def patch(self, request, *args, **kwargs):
         outcome = ServiceOutcome(EventApproveServices, kwargs | {"user": request.user})
+        return Response({"INFO": outcome.result}, status=status.HTTP_200_OK)
+
+
+class EventCancelView(APIView):
+
+    def delete(self, request, *args, **kwargs):
+        outcome = ServiceOutcome(EventCancelServices, kwargs | {"user": request.user})
         return Response({"INFO": outcome.result}, status=status.HTTP_200_OK)
