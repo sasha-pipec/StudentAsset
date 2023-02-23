@@ -1,4 +1,6 @@
 from django.urls import path
+
+from api.views.post import PostCreateListView
 from api.views.user import UserGetView
 from api.views.event import EventCreateListView
 from api.views.event import EventApproveView
@@ -6,6 +8,9 @@ from api.views.event import EventCancelView
 from api.views.event import EventVoteView
 
 urlpatterns = [
+    # post
+    path('posts/', PostCreateListView.as_view(), name="posts"),
+
     # events
     path('events/', EventCreateListView.as_view(), name="events"),
     path('events/<int:id>/approve/', EventApproveView.as_view(), name="approve_event"),

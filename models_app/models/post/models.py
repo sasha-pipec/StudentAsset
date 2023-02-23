@@ -7,7 +7,8 @@ class Post(models.Model):
 
     title = models.CharField(max_length=255, verbose_name='Заголовок')
     description = models.TextField(blank=True, verbose_name='Описание')
-    date = models.DateTimeField(max_length=300, verbose_name="Дата проведения")
+    image = models.ImageField(upload_to="post/", verbose_name="Изображение")
+    date = models.DateTimeField(auto_now=True, max_length=300, verbose_name="Дата проведения")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Дата обновления')
     user = models.ForeignKey(to='User', on_delete=models.CASCADE, related_name='users', verbose_name='Пользователь')
