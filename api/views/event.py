@@ -9,6 +9,7 @@ from api.serializers.vote.get import VoteGetSerializers
 from api.services.event.create import EventCreateServices
 from api.services.event.approve import EventApproveServices
 from api.services.event.cancel import EventCancelServices
+from api.services.event.list import EventListServices
 from api.services.event.vote import EventVoteServices
 
 
@@ -19,7 +20,18 @@ class EventVoteView(APIView):
         return Response(VoteGetSerializers(outcome.result).data, status=status.HTTP_200_OK)
 
 
-class EventCreateView(APIView):
+class EventCreateListView(APIView):
+
+    def get(self, request, *args, **kwargs):
+        outcome = ServiceOutcome(EventListServices, request.POST.dict() | {"user": request.user})
+        return Response(
+            {
+                "Event": EventListSerializer(outcome.result.get('object_list'), many=True).data,
+                'page_data': outcome.result.get('page_range'),
+                'page_info': outcome.result.get('page_info'),
+            },
+            status=status.HTTP_200_OK
+        )
 
     def post(self, request, *args, **kwargs):
         outcome = ServiceOutcome(EventCreateServices, request.POST.dict() | {"user": request.user})
