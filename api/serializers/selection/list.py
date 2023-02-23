@@ -4,6 +4,12 @@ from models_app.models import Selection
 
 
 class SelectionListSerializer(serializers.ModelSerializer):
+    total_votes = serializers.IntegerField()
+
     class Meta:
         model = Selection
-        fields = "__all__"
+        fields = (
+            "id",
+            "title",
+            "total_votes",
+        )
