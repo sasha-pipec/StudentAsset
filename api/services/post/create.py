@@ -1,4 +1,5 @@
 from django import forms
+from django.db.models import Count
 from service_objects.fields import ModelField
 from service_objects.services import ServiceWithResult
 from models_app.models import Post
@@ -12,8 +13,10 @@ class PostCreateServices(ServiceWithResult):
     user = ModelField(User)
 
     def process(self):
-        self.result = Post.objects.create(title=self.cleaned_data['title'],
-                                          description=self.cleaned_data.get('description', ""),
-                                          image=self.cleaned_data["image"],
-                                          user=self.cleaned_data['user'])
+        self.result = Post.objects.create(
+            title=self.cleaned_data['title'],
+            description=self.cleaned_data.get('description', ""),
+            image=self.cleaned_data["image"],
+            user=self.cleaned_data['user']
+        )
         return self
