@@ -1,6 +1,7 @@
 from django import forms
-from rest_framework.exceptions import NotFound
 from django.core.exceptions import ObjectDoesNotExist
+from rest_framework import status
+from service_objects.errors import NotFound
 from service_objects.services import ServiceWithResult
 from models_app.models.user.models import User
 import requests
@@ -9,8 +10,6 @@ import requests
 class UserGetService(ServiceWithResult):
     username = forms.CharField()
     password = forms.CharField()
-
-    custom_validations = []
 
     def process(self):
         self.result = self._get_user
@@ -39,4 +38,4 @@ class UserGetService(ServiceWithResult):
                 role=request['role'],
                 API_Key=request['token'],
             )
-        raise NotFound('Invalid login or password')
+        raise NotFound(message='Invalid login or password', response_status=status.HTTP_400_BAD_REQUEST)

@@ -7,7 +7,8 @@ from api.serializers.user.get import UserGetSerializer
 
 
 class UserGetView(APIView):
+    authentication_classes = []
 
-    def get(self, request):
+    def get(self, request, *args, **kwargs):
         outcome = ServiceOutcome(UserGetService, {**request.data})
         return Response(UserGetSerializer(outcome.result).data, status=status.HTTP_200_OK)
