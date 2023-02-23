@@ -1,9 +1,7 @@
 from functools import lru_cache
 
 from django import forms
-from django.core.exceptions import ObjectDoesNotExist
 from rest_framework import status
-from service_objects.errors import NotFound
 from service_objects.errors import AccessDenied
 from service_objects.errors import ValidationError
 from service_objects.fields import ModelField
@@ -17,7 +15,7 @@ class EventApproveServices(ServiceWithResult):
     id = forms.IntegerField()
     user = ModelField(User)
 
-    custom_validations = ["event_presence", "check_user", "check_event_status"]
+    custom_validations = ["check_user", "check_event_status"]
 
     def process(self):
         self.run_custom_validations()
@@ -34,15 +32,7 @@ class EventApproveServices(ServiceWithResult):
     @property
     @lru_cache
     def _get_event(self):
-        try:
-            return Event.objects.get(id=self.cleaned_data['id'])
-        except ObjectDoesNotExist:
-            return None
-
-    def event_presence(self):
-        if not self._get_event:
-            raise NotFound(message=f"Event with if {self.cleaned_data['id']} not found",
-                           response_status=status.HTTP_404_NOT_FOUND)
+        return Event.objects.get(id=self.cleaned_data['id'])
 
     def check_user(self):
         if self.cleaned_data["user"].role not in [User.chairman, User.stud_asset]:
