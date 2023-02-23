@@ -6,7 +6,7 @@ class Vote(models.Model):
     """Vote model"""
 
     user = models.ForeignKey('User', on_delete=models.CASCADE, verbose_name='Пользователь')
-    selection = models.ForeignKey('Selection', on_delete=models.CASCADE, verbose_name='Выбор')
+    selection = models.ForeignKey('Selection', on_delete=models.CASCADE, related_name="votes", verbose_name='Выбор')
 
     def __str__(self):
         return self.user.username
