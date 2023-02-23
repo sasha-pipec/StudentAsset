@@ -9,7 +9,7 @@ class Selection(models.Model):
     event = models.ForeignKey('Event', on_delete=models.CASCADE, verbose_name='Событие')
 
     def __str__(self):
-        return self.title
+        return f"{self.id} {self.title}"
 
     class Meta:
         db_table = 'selections'

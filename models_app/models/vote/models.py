@@ -14,5 +14,6 @@ class Vote(models.Model):
     class Meta:
         db_table = 'votes'
         app_label = "models_app"
+        unique_together = ("user", "selection")
         verbose_name = 'Vote'
         verbose_name_plural = 'Votes'
