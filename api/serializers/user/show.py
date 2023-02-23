@@ -2,7 +2,7 @@ from rest_framework import serializers
 from models_app.models.user.models import User
 
 
-class UserGetSerializer(serializers.ModelSerializer):
+class UserShowSerializer(serializers.ModelSerializer):
     role = serializers.SerializerMethodField()
 
     def get_role(self, instance):

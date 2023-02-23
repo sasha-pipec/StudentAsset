@@ -11,7 +11,7 @@ ROLES = {
 }
 
 
-class UserGetService(ServiceWithResult):
+class UserShowService(ServiceWithResult):
     username = forms.CharField()
     password = forms.CharField()
 

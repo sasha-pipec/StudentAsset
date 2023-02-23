@@ -2,13 +2,13 @@ from django.db.models import Count
 from rest_framework import serializers
 
 from api.serializers.selection.list import SelectionListSerializer
-from api.serializers.user.get import UserGetSerializer
+from api.serializers.user.show import UserShowSerializer
 from models_app.models import Event
 from models_app.models import Selection
 
 
 class EventListSerializer(serializers.ModelSerializer):
-    user = UserGetSerializer(read_only=True)
+    user = UserShowSerializer(read_only=True)
     selection = serializers.SerializerMethodField()
 
     class Meta:

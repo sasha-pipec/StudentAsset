@@ -5,7 +5,7 @@ from service_objects.services import ServiceOutcome
 
 from api.serializers.event.list import EventListSerializer
 from api.serializers.selection.list import SelectionListSerializer
-from api.serializers.vote.get import VoteGetSerializers
+from api.serializers.vote.show import UserShowSerializer
 from api.services.event.create import EventCreateServices
 from api.services.event.approve import EventApproveServices
 from api.services.event.cancel import EventCancelServices
@@ -17,13 +17,13 @@ class EventVoteView(APIView):
 
     def post(self, request, *args, **kwargs):
         outcome = ServiceOutcome(EventVoteServices, kwargs | {"user": request.user})
-        return Response(VoteGetSerializers(outcome.result).data, status=status.HTTP_200_OK)
+        return Response(UserShowSerializer(outcome.result).data, status=status.HTTP_200_OK)
 
 
 class EventCreateListView(APIView):
 
     def get(self, request, *args, **kwargs):
-        outcome = ServiceOutcome(EventListServices, request.POST.dict() | {"user": request.user})
+        outcome = ServiceOutcome(EventListServices, request.query_params.dict())
         return Response(
             {
                 "Event": EventListSerializer(outcome.result.get('object_list'), many=True).data,
