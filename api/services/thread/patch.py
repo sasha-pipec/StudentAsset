@@ -35,7 +35,7 @@ class ThreadUpdateService(ServiceWithResult):
     @property
     @lru_cache
     def _get_thread(self):
-        return Thread.objects.get(id=self.cleaned_data['id'])
+        return Thread.objects.get(id=self.cleaned_data['id'], user=self.cleaned_data['user'])
 
     def check_thread_status(self):
         if self._get_thread.status != Thread.OPEN:
