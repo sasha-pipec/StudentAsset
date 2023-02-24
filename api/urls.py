@@ -23,6 +23,6 @@ urlpatterns = [
     path('events/<int:id>/vote/', EventVoteView.as_view(), name="vote_event"),
 
     # users
-    path('users/', UserShowView.as_view()),
-    path('users/<int:id>/mute_toggle/', UserMuteView.as_view()),
+    path('users/', UserShowView.as_view(), name="users"),
+    path('users/<int:id>/mute_toggle/', UserMuteView.as_view(), name="mute_users"),
 ]
