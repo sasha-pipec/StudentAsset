@@ -24,7 +24,7 @@ urlpatterns = [
 
     # users
     path('users/', UserListView.as_view(), name="users"),
-    path('users/<int:id>/', UserShowView.as_view(), name="users"),
+    path('users/<int:id>/', UserShowView.as_view(), name="get_users"),
     path('users/login/', UserLoginView.as_view(), name="login_users"),
     path('users/<int:id>/mute_toggle/', UserMuteView.as_view(), name="mute_users"),
 ]
