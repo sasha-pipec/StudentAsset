@@ -19,8 +19,7 @@ class EventApproveServices(ServiceWithResult):
 
     def process(self):
         self.run_custom_validations()
-        if self.is_valid():
-            self.result = self._event_approve
+        self.result = self._event_approve
         return self
 
     @property

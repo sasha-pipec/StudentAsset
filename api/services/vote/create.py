@@ -20,8 +20,7 @@ class EventVoteServices(ServiceWithResult):
 
     def process(self):
         self.run_custom_validations()
-        if self.is_valid():
-            self.result = self._create_vote
+        self.result = self._create_vote
         return self
 
     @property

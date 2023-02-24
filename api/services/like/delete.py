@@ -18,12 +18,8 @@ class LikeDeleteServices(ServiceWithResult):
 
     def process(self):
         self.run_custom_validations()
-        if self.is_valid():
-            self._delete_like()
-        return self
-
-    def _delete_like(self):
         self._get_like.delete()
+        return self
 
     @property
     def _get_like(self):

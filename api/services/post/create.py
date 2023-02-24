@@ -1,5 +1,6 @@
 from django import forms
-from django.db.models import Count
+from rest_framework import status
+from service_objects.errors import AccessDenied
 from service_objects.fields import ModelField
 from service_objects.services import ServiceWithResult
 from models_app.models import Post
@@ -12,7 +13,10 @@ class PostCreateServices(ServiceWithResult):
     image = forms.ImageField()
     user = ModelField(User)
 
+    custom_validations = ["check_rights", ]
+
     def process(self):
+        self.run_custom_validations()
         self.result = Post.objects.create(
             title=self.cleaned_data['title'],
             description=self.cleaned_data.get('description', ""),
@@ -20,3 +24,8 @@ class PostCreateServices(ServiceWithResult):
             user=self.cleaned_data['user']
         )
         return self
+
+    def check_rights(self):
+        if self.cleaned_data["user"].role not in [User.chairman, User.stud_asset]:
+            raise AccessDenied(message="Sorry but you don't have rights on create Post",
+                               response_status=status.HTTP_403_FORBIDDEN)

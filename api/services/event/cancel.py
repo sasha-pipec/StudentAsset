@@ -19,8 +19,7 @@ class EventCancelServices(ServiceWithResult):
 
     def process(self):
         self.run_custom_validations()
-        if self.is_valid():
-            self.result = self._event_cancel
+        self.result = self._event_cancel
         return self
 
     @property
