@@ -1,26 +1,23 @@
-from django import forms
 from rest_framework import status
+from service_objects.errors import AccessDenied
 from service_objects.fields import ModelField
 from service_objects.services import ServiceWithResult
-from service_objects.errors import AccessDenied
-
 from models_app.models import User
 
 
-class UserShowService(ServiceWithResult):
-    id = forms.IntegerField()
+class UserListService(ServiceWithResult):
     user = ModelField(User)
 
     custom_validations = ["check_rights"]
 
     def process(self):
         self.run_custom_validations()
-        self.result = self._user
+        self.result = self._users
         return self
 
     @property
-    def _user(self):
-        return User.objects.get(id=self.cleaned_data["id"])
+    def _users(self):
+        return User.objects.all()
 
     def check_rights(self):
         if self.cleaned_data["user"].role not in [User.chairman, User.stud_asset]:
