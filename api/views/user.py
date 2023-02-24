@@ -8,7 +8,7 @@ from api.services.user.show import UserShowService
 from api.serializers.user.show import UserShowSerializer
 
 
-class UserShowView(APIView):
+class UserLoginView(APIView):
     authentication_classes = []
 
     def get(self, request, *args, **kwargs):

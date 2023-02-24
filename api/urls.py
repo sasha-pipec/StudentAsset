@@ -3,7 +3,7 @@ from django.urls import path
 from api.views.like import LikeCreateDeleteView
 from api.views.post import PostCreateListView
 from api.views.post import PostShowChangeDeleteView
-from api.views.user import UserShowView
+from api.views.user import UserLoginView
 from api.views.user import UserMuteView
 from api.views.event import EventCreateListView
 from api.views.event import EventApproveView
@@ -23,6 +23,6 @@ urlpatterns = [
     path('events/<int:id>/vote/', EventVoteView.as_view(), name="vote_event"),
 
     # users
-    path('users/', UserShowView.as_view(), name="users"),
+    path('users/login/', UserLoginView.as_view(), name="login_users"),
     path('users/<int:id>/mute_toggle/', UserMuteView.as_view(), name="mute_users"),
 ]
