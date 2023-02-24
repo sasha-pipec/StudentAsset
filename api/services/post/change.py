@@ -28,17 +28,17 @@ class PostChangeServices(ServiceWithResult):
     @property
     def _change_post(self):
         if self.cleaned_data.get("title"):
-            self._get_post.title = self.cleaned_data["title"]
+            self._post.title = self.cleaned_data["title"]
         if self.cleaned_data.get("description"):
-            self._get_post.description = self.cleaned_data["description"]
+            self._post.description = self.cleaned_data["description"]
         if self.cleaned_data.get("image"):
-            self._get_post.image = self.cleaned_data["image"]
-        self._get_post.save()
-        return self._get_post
+            self._post.image = self.cleaned_data["image"]
+        self._post.save()
+        return self._post
 
     @property
     @lru_cache
-    def _get_post(self):
+    def _post(self):
         return Post.objects.annotate(total_likes=Count("voting_posts")).get(id=self.cleaned_data["id"])
 
     def check_rights(self):

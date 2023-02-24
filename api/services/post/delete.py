@@ -16,11 +16,11 @@ class PostDeleteServices(ServiceWithResult):
 
     def process(self):
         self.run_custom_validations()
-        self._get_post.delete()
+        self._post.delete()
         return self
 
     @property
-    def _get_post(self):
+    def _post(self):
         return Post.objects.get(id=self.cleaned_data["id"])
 
     def check_rights(self):

@@ -24,13 +24,13 @@ class EventApproveServices(ServiceWithResult):
 
     @property
     def _event_approve(self):
-        self._get_event.status = Event.APPROVED
-        self._get_event.save()
+        self._event.status = Event.APPROVED
+        self._event.save()
         return f"Status event with id {self.cleaned_data['id']} changed successfully"
 
     @property
     @lru_cache
-    def _get_event(self):
+    def _event(self):
         return Event.objects.get(id=self.cleaned_data['id'])
 
     def check_user(self):
@@ -38,6 +38,6 @@ class EventApproveServices(ServiceWithResult):
             raise AccessDenied(message="Access denied", response_status=status.HTTP_403_FORBIDDEN)
 
     def check_event_status(self):
-        if self._get_event.status == Event.APPROVED:
+        if self._event.status == Event.APPROVED:
             raise ValidationError(message="The event already has a status of approved",
                                   response_status=status.HTTP_400_BAD_REQUEST)

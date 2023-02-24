@@ -27,15 +27,15 @@ class EventVoteServices(ServiceWithResult):
     def _create_vote(self):
         return Vote.objects.create(
             user=self.cleaned_data["user"],
-            selection=self._get_selection
+            selection=self._selection
         )
 
     @property
     @lru_cache
-    def _get_selection(self):
+    def _selection(self):
         return Selection.objects.get(id=self.cleaned_data["id"])
 
     def vote_presence(self):
-        if Vote.objects.filter(user=self.cleaned_data["user"], selection=self._get_selection).exists():
+        if Vote.objects.filter(user=self.cleaned_data["user"], selection=self._selection).exists():
             raise ValidationError(message="Vote with this user and selection exists",
                                   response_status=status.HTTP_400_BAD_REQUEST)

@@ -24,12 +24,12 @@ class EventCancelServices(ServiceWithResult):
 
     @property
     def _event_cancel(self):
-        self._get_event.delete()
+        self._event.delete()
         return f"Event with id {self.cleaned_data['id']} was successfully rejected and deleted"
 
     @property
     @lru_cache
-    def _get_event(self):
+    def _event(self):
         return Event.objects.get(id=self.cleaned_data['id'])
 
     def check_user(self):
@@ -37,6 +37,6 @@ class EventCancelServices(ServiceWithResult):
             raise AccessDenied(message="Access denied", response_status=status.HTTP_403_FORBIDDEN)
 
     def check_event_status(self):
-        if self._get_event.status == Event.APPROVED:
+        if self._event.status == Event.APPROVED:
             raise ValidationError(message="The event has a status of approved",
                                   response_status=status.HTTP_400_BAD_REQUEST)

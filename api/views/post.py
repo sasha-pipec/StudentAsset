@@ -7,7 +7,8 @@ from api.serializers.post.show import PostShowSerializer
 from api.services.post.change import PostChangeServices
 from api.services.post.create import PostCreateServices
 from api.services.post.delete import PostDeleteServices
-from api.services.post.show import PostListServices
+from api.services.post.list import PostListServices
+from api.services.post.show import PostShowServices
 
 
 class PostCreateListView(APIView):
@@ -32,7 +33,20 @@ class PostCreateListView(APIView):
         )
 
 
-class PostChangeDeleteView(APIView):
+class PostShowChangeDeleteView(APIView):
+
+    def get(self, request, *args, **kwargs):
+        outcome = ServiceOutcome(
+            PostShowServices,
+            kwargs,
+        )
+        return Response(
+            {
+                "post": PostShowSerializer(outcome.result).data
+            },
+            status=status.HTTP_200_OK
+        )
+
     def patch(self, request, *args, **kwargs):
         outcome = ServiceOutcome(
             PostChangeServices,

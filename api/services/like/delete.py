@@ -18,22 +18,22 @@ class LikeDeleteServices(ServiceWithResult):
 
     def process(self):
         self.run_custom_validations()
-        self._get_like.delete()
+        self._like.delete()
         return self
 
     @property
-    def _get_like(self):
+    def _like(self):
         return Like.objects.get(
             user=self.cleaned_data["user"],
-            post=self._get_post,
+            post=self._post,
         )
 
     @property
-    def _get_post(self):
+    def _post(self):
         return Post.objects.get(id=self.cleaned_data["id"])
 
     def user_rights(self):
-        if self.cleaned_data["user"] != self._get_like.user:
+        if self.cleaned_data["user"] != self._like.user:
             raise ValidationError(
                 message="You didn't like this post",
                 response_status=status.HTTP_400_BAD_REQUEST

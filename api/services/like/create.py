@@ -19,10 +19,10 @@ class LikeCreateServices(ServiceWithResult):
     @property
     def _create_like(self):
         return Like.objects.create(
-            post=self._get_post,
+            post=self._post,
             user=self.cleaned_data["user"]
         )
 
     @property
-    def _get_post(self):
+    def _post(self):
         return Post.objects.annotate(total_likes=Count("voting_posts")).get(id=self.cleaned_data["id"])

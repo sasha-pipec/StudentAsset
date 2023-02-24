@@ -16,11 +16,11 @@ class UserShowService(ServiceWithResult):
     password = forms.CharField()
 
     def process(self):
-        self.result = self._get_user
+        self.result = self._user
         return self
 
     @property
-    def _get_user(self):
+    def _user(self):
         try:
             return User.objects.get(username=self.cleaned_data['username'], password=self.cleaned_data['password'])
         except ObjectDoesNotExist:
