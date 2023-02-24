@@ -32,7 +32,7 @@ DEBUG = env("DEBUG", cast=bool, default=True)
 ALLOWED_HOSTS = env("ALLOWED_HOSTS", cast=lambda v: [s.strip() for s in v.split(",")])
 
 BASE_DOMAIN = (
-    f"{env('SCHEMA', default='http')}://{env('DOMAIN', default='localhost:8000')}"
+    f"{env('SCHEMA', default='https')}://{env('DOMAIN', default='localhost:8000')}"
 )
 
 # Application definition
@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     "models_app.apps.ModelsAppConfig",
     "api",
     'front',
+    "drf_yasg",
 ]
 
 MIDDLEWARE = [
