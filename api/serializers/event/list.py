@@ -1,4 +1,3 @@
-from django.db.models import Count
 from rest_framework import serializers
 
 from api.serializers.selection.list import SelectionListSerializer
@@ -17,6 +16,6 @@ class EventListSerializer(serializers.ModelSerializer):
 
     def get_selection(self, obj):
         return SelectionListSerializer(
-            Selection.objects.filter(event=obj).annotate(total_votes=Count("votes")),
+            Selection.objects.filter(event=obj),
             many=True
         ).data
