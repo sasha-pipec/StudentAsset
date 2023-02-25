@@ -8,6 +8,7 @@ from api.services.thread.patch import ThreadUpdateService
 from api.services.thread.delete import ThreadDeleteService
 from api.services.thread.list import ThreadListServices
 from api.services.thread.close import ThreadCloseService
+from api.services.thread.pinned import ThreadPinnedService
 from api.serializers.thread.list import ThreadSerializers
 
 
@@ -49,4 +50,11 @@ class ThreadCloseView(APIView):
 
     def patch(self, request, *args, **kwargs):
         outcome = ServiceOutcome(ThreadCloseService, kwargs | {'user': request.user})
+        return Response({"INFO": outcome.result}, status=status.HTTP_200_OK)
+
+
+class ThreadPinnedView(APIView):
+
+    def patch(self, request, *args, **kwargs):
+        outcome = ServiceOutcome(ThreadPinnedService, kwargs | {'user': request.user})
         return Response({"INFO": outcome.result}, status=status.HTTP_200_OK)
