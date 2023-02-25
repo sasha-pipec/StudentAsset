@@ -8,6 +8,6 @@ SWAGGER_SETTINGS = {
     "OPERATIONS_SORTER": "method",
     "DEFAULT_MODEL_RENDERING": "example",
     "SECURITY_DEFINITIONS": {
-        "Token": {"type": "apiKey", "name": "Authorization", "in": "header"},
+        "Token": {"type": "apiKey", "name": "token", "in": "header"},
     },
 }

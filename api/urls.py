@@ -1,4 +1,5 @@
 from django.urls import path
+from conf.yasg import urlpatterns as doc_urls
 
 from api.views.like import LikeCreateDeleteView
 from api.views.post import PostCreateListView
@@ -28,3 +29,5 @@ urlpatterns = [
     path('users/login/', UserLoginView.as_view(), name="login_users"),
     path('users/<int:id>/mute_toggle/', UserMuteView.as_view(), name="mute_users"),
 ]
+
+urlpatterns += doc_urls

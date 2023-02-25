@@ -6,15 +6,16 @@ from drf_yasg import openapi
 
 schema_view = get_schema_view(
    openapi.Info(
-      title="Snippets API",
+      title="Student Assets",
       default_version='v1',
-      description="Test description",
+      description="API Docs for Student Assets",
       terms_of_service="https://www.google.com/policies/terms/",
-      contact=openapi.Contact(email="contact@snippets.local"),
+      contact=openapi.Contact(email="stud.assets@gmail.ru"),
       license=openapi.License(name="BSD License"),
    ),
    public=True,
-   permission_classes=[permissions.AllowAny],
+   permission_classes=(permissions.AllowAny, ),
+   authentication_classes=(),
 )
 
 urlpatterns = [

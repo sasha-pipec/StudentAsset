@@ -9,7 +9,6 @@ from api.services.like.delete import LikeDeleteServices
 
 
 class LikeCreateDeleteView(APIView):
-
     def post(self, request, *args, **kwargs):
         outcome = ServiceOutcome(LikeCreateServices, kwargs | {"user": request.user})
         return Response(LikeShowSerializer(outcome.result).data, status=status.HTTP_200_OK)
