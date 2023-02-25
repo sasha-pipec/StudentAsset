@@ -10,6 +10,7 @@ from api.views.event import EventCreateListView
 from api.views.event import EventApproveView
 from api.views.event import EventDeleteView
 from api.views.event import EventVoteView
+from api.views.thread import ThreadListCreateView, ThreadRetrieveUpdateDestroyView, ThreadCloseView, ThreadPinnedView
 
 urlpatterns = [
     # post
@@ -28,6 +29,12 @@ urlpatterns = [
     path('users/<int:id>/', UserShowView.as_view(), name="get_users"),
     path('users/login/', UserLoginView.as_view(), name="login_users"),
     path('users/<int:id>/mute_toggle/', UserMuteView.as_view(), name="mute_users"),
+
+    # threads
+    path('threads/', ThreadListCreateView.as_view(), name="threads"),
+    path('threads/<int:id>', ThreadRetrieveUpdateDestroyView.as_view()),
+    path('threads/<int:id>/close/', ThreadCloseView.as_view()),
+    path('threads/<int:id>/pinned/', ThreadPinnedView.as_view()),
 ]
 
 urlpatterns += doc_urls
