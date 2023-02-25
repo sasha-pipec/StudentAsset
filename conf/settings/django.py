@@ -31,9 +31,15 @@ DEBUG = env("DEBUG", cast=bool, default=True)
 
 ALLOWED_HOSTS = env("ALLOWED_HOSTS", cast=lambda v: [s.strip() for s in v.split(",")])
 
+CORS_ALLOWED_ORIGINS = env(
+    "CORS_ALLOWED_ORIGINS", cast=lambda v: [s.strip() for s in v.split(",")]
+)
+
 BASE_DOMAIN = (
     f"{env('SCHEMA', default='http')}://{env('DOMAIN', default='localhost:8000')}"
 )
+
+CSRF_TRUSTED_ORIGINS = env("CSRF_TRUSTED_ORIGINS", cast=lambda v: [s.strip() for s in v.split(",")])
 
 # Application definition
 
