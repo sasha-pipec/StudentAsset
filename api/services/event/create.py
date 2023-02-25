@@ -14,7 +14,10 @@ class EventCreateServices(ServiceWithResult):
     date = forms.DateTimeField(required=False)
     user = ModelField(User)
 
+    custom_validations = ["check_selection_count", "coincidence_selection_count"]
+
     def process(self):
+        self.run_custom_validations()
         self.result = {
             "event": self._create_event,
             "selections": [],
@@ -39,3 +42,16 @@ class EventCreateServices(ServiceWithResult):
                         "event": self.result["event"],
                     }).result
                 )
+
+    def check_selection_count(self):
+        if not self.data.get("selection_count", None):
+            raise ValidationError(message="You did not specify the number of possible voting options - selection_count",
+                                  response_status=status.HTTP_400_BAD_REQUEST)
+
+    def coincidence_selection_count(self):
+        count = len(
+            [1 for index in range(int(self.data["selection_count"])) if self.data.get(f"selection_{index}_title")]
+        )
+        if count != int(self.data["selection_count"]):
+            raise ValidationError(message="The number of responses does not match the number sent",
+                                  response_status=status.HTTP_400_BAD_REQUEST)
