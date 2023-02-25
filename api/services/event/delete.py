@@ -11,11 +11,11 @@ from models_app.models import Event
 from models_app.models import User
 
 
-class EventCancelServices(ServiceWithResult):
+class EventDeleteServices(ServiceWithResult):
     id = forms.IntegerField()
     user = ModelField(User)
 
-    custom_validations = ["event_presence", "check_user", "check_event_status"]
+    custom_validations = ["check_user", ]
 
     def process(self):
         self.run_custom_validations()
@@ -36,7 +36,3 @@ class EventCancelServices(ServiceWithResult):
         if self.cleaned_data["user"].role not in [User.chairman, User.stud_asset]:
             raise AccessDenied(message="Access denied", response_status=status.HTTP_403_FORBIDDEN)
 
-    def check_event_status(self):
-        if self._event.status == Event.APPROVED:
-            raise ValidationError(message="The event has a status of approved",
-                                  response_status=status.HTTP_400_BAD_REQUEST)

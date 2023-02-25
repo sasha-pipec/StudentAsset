@@ -8,7 +8,7 @@ from api.views.user import UserLoginView, UserListView, UserShowView
 from api.views.user import UserMuteView
 from api.views.event import EventCreateListView
 from api.views.event import EventApproveView
-from api.views.event import EventCancelView
+from api.views.event import EventDeleteView
 from api.views.event import EventVoteView
 
 urlpatterns = [
@@ -19,8 +19,8 @@ urlpatterns = [
 
     # events
     path('events/', EventCreateListView.as_view(), name="events"),
+    path('events/<int:id>/', EventDeleteView.as_view(), name="delete_event"),
     path('events/<int:id>/approve/', EventApproveView.as_view(), name="approve_event"),
-    path('events/<int:id>/cancel/', EventCancelView.as_view(), name="cancel_event"),
     path('events/<int:id>/vote/', EventVoteView.as_view(), name="vote_event"),
 
     # users

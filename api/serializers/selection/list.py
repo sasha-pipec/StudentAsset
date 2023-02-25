@@ -4,7 +4,7 @@ from models_app.models import Selection
 
 
 class SelectionListSerializer(serializers.ModelSerializer):
-    total_votes = serializers.IntegerField()
+    total_votes = serializers.IntegerField(default=0)
 
     class Meta:
         model = Selection
