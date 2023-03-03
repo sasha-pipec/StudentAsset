@@ -31,15 +31,11 @@ DEBUG = env("DEBUG", cast=bool, default=True)
 
 ALLOWED_HOSTS = env("ALLOWED_HOSTS", cast=lambda v: [s.strip() for s in v.split(",")])
 
-CORS_ALLOWED_ORIGINS = env(
-    "CORS_ALLOWED_ORIGINS", cast=lambda v: [s.strip() for s in v.split(",")]
-)
 
 BASE_DOMAIN = (
     f"{env('SCHEMA', default='http')}://{env('DOMAIN', default='localhost:8000')}"
 )
 
-CSRF_TRUSTED_ORIGINS = env("CSRF_TRUSTED_ORIGINS", cast=lambda v: [s.strip() for s in v.split(",")])
 
 # Application definition
 
@@ -90,7 +86,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'conf.wsgi.application'
 ASGI_APPLICATION = 'conf.asgi.application'
-
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
@@ -145,3 +140,6 @@ FILE_UPLOAD_HANDLERS = [
 DATA_UPLOAD_MAX_NUMBER_FIELDS = env(
     "DATA_UPLOAD_MAX_NUMBER_FIELDS", cast=int, default=1024
 )
+CORS_ORIGIN_ALLOW_ALL = True
+
+
