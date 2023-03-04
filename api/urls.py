@@ -11,6 +11,7 @@ from api.views.event import EventApproveView
 from api.views.event import EventDeleteView
 from api.views.event import EventVoteView
 from api.views.thread import ThreadListCreateView, ThreadRetrieveUpdateDestroyView, ThreadCloseView, ThreadPinnedView
+from api.views.comment import CommentCreateListView
 
 urlpatterns = [
     # post
@@ -35,6 +36,7 @@ urlpatterns = [
     path('threads/<int:id>', ThreadRetrieveUpdateDestroyView.as_view()),
     path('threads/<int:id>/close/', ThreadCloseView.as_view()),
     path('threads/<int:id>/pinned/', ThreadPinnedView.as_view()),
+    path('threads/<int:id>/comments/', CommentCreateListView.as_view()),
 ]
 
 urlpatterns += doc_urls
