@@ -18,3 +18,6 @@ media/
 /front/npm-debug.log*
 /front/yarn-debug.log*
 /front/yarn-error.log*
+Python-3.10.0rc2.tgz
+Python-3.10.0rc2/
+static/
