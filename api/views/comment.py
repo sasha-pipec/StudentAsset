@@ -5,6 +5,8 @@ from service_objects.services import ServiceOutcome
 from api.serializers.comment.create import CommentCreateSerializer
 from api.serializers.comment.list import CommentListSerializer
 from api.services.comment.create import CommentCreateService
+from api.services.comment.change import CommentChangeService
+from api.services.comment.delete import CommentDeleteService
 from api.services.comment.list import CommentListService
 
 
@@ -28,3 +30,15 @@ class CommentCreateListView(APIView):
         outcome = ServiceOutcome(CommentCreateService,
                                  kwargs | {**request.data | request.POST.dict() | {'user': request.user}})
         return Response(CommentCreateSerializer(outcome.result).data, status=status.HTTP_200_OK)
+
+
+class CommentChangeDeleteView(APIView):
+
+    def patch(self, request, *args, **kwargs):
+        outcome = ServiceOutcome(CommentChangeService,
+                                 kwargs | {**request.data | request.POST.dict() | {'user': request.user}})
+        return Response(CommentCreateSerializer(outcome.result).data, status=status.HTTP_200_OK)
+
+    def delete(self, request, *args, **kwargs):
+        outcome = ServiceOutcome(CommentDeleteService, kwargs | {'user': request.user})
+        return Response({"INFO": outcome.result}, status=status.HTTP_200_OK)
