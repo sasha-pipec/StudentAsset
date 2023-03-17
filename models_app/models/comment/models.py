@@ -16,9 +16,9 @@ class Comment(models.Model):
     is_question = models.CharField(max_length=20, choices=TYPE, default=post_comment, verbose_name='Комментарий или ответ')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Дата обновления')
-    answer = models.ForeignKey(to='Comment', on_delete=models.CASCADE, verbose_name='Ответ', null=True, blank=True,
+    answer_to = models.ForeignKey(to='Comment', on_delete=models.CASCADE, verbose_name='Ответ для', null=True, blank=True,
                                related_name='answers')
-    post = models.ForeignKey(to='Post', on_delete=models.CASCADE, verbose_name='Пост', related_name='comments')
+    thread = models.ForeignKey(to='Thread', on_delete=models.CASCADE, verbose_name='Тред', related_name='comments')
     user = models.ForeignKey(to='User', on_delete=models.CASCADE, verbose_name='Пользователь', related_name='comments_user')
 
     class Meta:
