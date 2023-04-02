@@ -12,6 +12,7 @@ class UserShowSerializer(serializers.ModelSerializer):
         model = User
         fields = (
             "id",
+            "API_Key",
             "username",
             "first_name",
             "last_name",
