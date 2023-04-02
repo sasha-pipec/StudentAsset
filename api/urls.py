@@ -4,7 +4,7 @@ from conf.yasg import urlpatterns as doc_urls
 from api.views.like import LikeCreateDeleteView
 from api.views.post import PostCreateListView
 from api.views.post import PostShowChangeDeleteView
-from api.views.user import UserLoginView, UserListView, UserShowView
+from api.views.user import UserLoginView, UserListView, UserShowView, UserAuthView
 from api.views.user import UserMuteView
 from api.views.event import EventCreateListView
 from api.views.event import EventApproveView
@@ -29,6 +29,7 @@ urlpatterns = [
     path('users/', UserListView.as_view(), name="users"),
     path('users/<int:id>/', UserShowView.as_view(), name="get_users"),
     path('users/login/', UserLoginView.as_view(), name="login_users"),
+    path('users/auth/', UserAuthView.as_view(), name="auth_users"),
     path('users/<int:id>/mute_toggle/', UserMuteView.as_view(), name="mute_users"),
 
     # threads

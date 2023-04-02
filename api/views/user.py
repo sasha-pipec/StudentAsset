@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from service_objects.services import ServiceOutcome
 
+from api.services.user.auth import UserAuthService
 from api.services.user.list import UserListService
 from api.services.user.mute_toggle import UserMuteToggleService
 from api.services.user.login import UserLoginService
@@ -33,4 +34,10 @@ class UserListView(APIView):
 class UserShowView(APIView):
     def get(self, request, *args, **kwargs):
         outcome = ServiceOutcome(UserShowService, kwargs | {'user': request.user})
+        return Response(UserShowSerializer(outcome.result).data, status=status.HTTP_200_OK)
+
+
+class UserAuthView(APIView):
+    def get(self, request, *args, **kwargs):
+        outcome = ServiceOutcome(UserAuthService, request.query_params.dict())
         return Response(UserShowSerializer(outcome.result).data, status=status.HTTP_200_OK)
