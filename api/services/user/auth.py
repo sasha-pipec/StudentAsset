@@ -1,4 +1,7 @@
 from django import forms
+from django.core.exceptions import ObjectDoesNotExist
+from rest_framework import status
+from service_objects.errors import NotFound
 from service_objects.services import ServiceWithResult
 
 from models_app.models import User
@@ -13,4 +16,7 @@ class UserAuthService(ServiceWithResult):
 
     @property
     def _user(self):
-        return User.objects.get(API_Key=self.cleaned_data["API_Key"])
+        try:
+            return User.objects.get(API_Key=self.cleaned_data["API_Key"])
+        except ObjectDoesNotExist:
+            raise NotFound(message="User with this token not found", response_status=status.HTTP_404_NOT_FOUND)
