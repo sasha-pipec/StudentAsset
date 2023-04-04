@@ -1,0 +1,55 @@
+.header {
+  width: 100%;
+  height: 110px;
+  padding: 40px 60px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.logo {
+  font-size: 24px;
+  line-height: 120%;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+  color: #000000;
+  text-decoration: none;
+}
+.navigation {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 140%;
+  text-transform: lowercase;
+  color: #000000;
+  opacity: 0.6;
+  text-decoration: none;
+  padding: 0 6px;
+}
+.navigation:hover {
+  opacity: 1;
+}
+.navigation:active {
+  background: #000000;
+  color: #ffffff;
+}
+.header__btn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 4px 6px;
+  gap: 10px;
+
+  width: 58px;
+  height: 30px;
+
+  opacity: 0.6;
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+}
+.header__btn_text {
+  font-size: 16px;
+  margin: 0;
+  width: 100%;
+  text-align: center;
+}
