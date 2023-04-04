@@ -1,39 +1,28 @@
-import React, {useEffect} from "react";
-import Item from "./Item";
-
-function App() {
-  let [item, setItem] = React.useState([])
-  useEffect(()=>{
-    fetch('http://127.0.0.1:8000/api/posts/', {
-    method:'GET',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-      'content-length': '518' ,
-    }
-  })
-  .then((res)=>{
-    if(res.ok){
-      
-      return res;
-      
-    }else{
-      console.log('idi nah',res)
-    }
-  })
-  .then((posts)=>{return posts.json()})
-  .then(function(value){
-    console.log(value.posts);
-})
-  },[])
-
-    return (
-     <div>
-      <Item>
-        
-      </Item>
-     </div>
-    );
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import { EventsPage } from "./pages/EventsPage/EventsPage";
+import { MainPage } from "./pages/MainPage/MainPage";
+import { VotePage } from "./pages/VotePage/VotePage";
+import { Header } from "./components/header/header";
+import { observer } from "mobx-react-lite";
+import UserStore from "./store/UserStore";
+const App = observer(() => {
+  const token = localStorage.getItem("token");
+  if (token !== null && UserStore.isAuthenticated === false) {
+    UserStore.auth(token);
+  } else {
   }
+  return (
+    <>
+      <Routes>
+        <Route path="/" element={<Header />}>
+          <Route index element={<EventsPage />} />
+          <Route path="main" element={<MainPage />} />
+          <Route path="vote" element={<VotePage />} />
+        </Route>
+      </Routes>
+    </>
+  );
+});
 
 export default App;

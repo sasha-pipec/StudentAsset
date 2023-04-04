@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "mobx-react-lite": "^3.4.3",
+    "react-router-dom": "^6.10.0"
+  }
+}
