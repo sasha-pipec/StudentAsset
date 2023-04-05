@@ -52,7 +52,6 @@ INSTALLED_APPS = [
     'service_objects',
     "models_app.apps.ModelsAppConfig",
     "api",
-    'front',
 ]
 
 MIDDLEWARE = [
