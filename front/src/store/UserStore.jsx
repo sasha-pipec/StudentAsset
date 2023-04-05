@@ -22,13 +22,14 @@ class UserStore {
     );
 
     if (response.ok) {
-      const { username, API_Key, first_name, last_name } =
+      const { username, API_Key, first_name, last_name, role } =
         await response.json();
       this.isAuthenticated = true;
       this.username = username;
       this.first_name = first_name;
       this.last_name = last_name;
       this.token = API_Key;
+      this.role = role;
       if (get_token) {
         localStorage.setItem("token", this.token);
       }

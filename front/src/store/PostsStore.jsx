@@ -10,18 +10,21 @@ class PostsStore {
 
   getPosts = async () => {
     const token = localStorage.getItem("token");
-    const response = await fetch(`http://46.173.215.136/api/posts/`, {
-      headers: new Headers({
-        token: `${token}`,
-      }),
-      method: "GET",
-    });
+    const response = await fetch(
+      `http://46.173.215.136/api/posts/?per_page=12`,
+      {
+        headers: new Headers({
+          token: `${token}`,
+        }),
+        method: "GET",
+      },
+    );
 
     if (response.ok) {
       const { posts } = await response.json();
 
       this.posts = posts;
-
+      console.log(posts);
       console.log("Посты получены");
     } else {
       // Обрабатываем ошибку авторизации

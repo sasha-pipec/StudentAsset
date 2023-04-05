@@ -8,7 +8,6 @@ const Loginmodal = ({ visible }) => {
     const username = event.target.username.value;
     const password = event.target.password.value;
     const get_token = event.target.auto_enter.checked;
-    console.log(get_token);
     UserStore.login(username, password, get_token);
   }
   const rootCl = [classes.wrapper];

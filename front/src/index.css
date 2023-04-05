@@ -17,3 +17,18 @@ code {
   font-weight: 400;
   box-sizing: border-box;
 }
+.postlist {
+  display: grid;
+  grid-template-columns: repeat(3, 420px);
+  column-gap: 30px;
+  row-gap: 48px;
+  justify-items: stretch;
+  align-items: stretch;
+  grid-auto-columns: minmax(420px, 420px);
+  grid-auto-rows: minmax(420px, 420px);
+  width: 100%;
+}
+#root {
+  max-width: 1440px;
+  margin: 0 auto;
+}

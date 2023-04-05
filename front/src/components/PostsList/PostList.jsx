@@ -8,10 +8,16 @@ export const PostList = observer(() => {
     PostsStore.getPosts();
   }, []);
   return (
-    <>
+    <div className="postlist">
       {PostsStore.posts.map((post, index) => (
-        <PostItem key={index}></PostItem>
+        <PostItem
+          key={index + 1}
+          index={index + 1}
+          img={post.image}
+          title={post.title}
+          date={post.date}
+        />
       ))}
-    </>
+    </div>
   );
 });
