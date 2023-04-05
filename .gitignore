@@ -1,4 +1,5 @@
 .idea/
+pycache/
 __pycache__/
 .env
 media/
@@ -13,3 +14,4 @@ front/package.json
 front/README.md
 Python-3.10.0rc2.tgz
 Python-3.10.0rc2/
+
