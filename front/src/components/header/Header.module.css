@@ -25,14 +25,19 @@
   text-decoration: none;
   padding: 0 6px;
 }
+.nav_container {
+  display: flex;
+  gap: 30px;
+}
 .navigation:hover {
   opacity: 1;
 }
-.navigation:active {
+.active-link {
   background: #000000;
   color: #ffffff;
+  font-size: 30px;
 }
-.header__btn {
+.header__btn_login {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -52,4 +57,28 @@
   margin: 0;
   width: 100%;
   text-align: center;
+}
+.btn_container {
+  height: 52px;
+  max-height: 52px;
+}
+.header__btn {
+  width: fit-content;
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+  text-align: left;
+  padding: 0;
+  height: 100%;
+}
+.header__btn_title {
+  margin: 0;
+  font-size: 16px;
+  line-height: 140%;
+  text-transform: lowercase;
+}
+.header__btn_subtitle {
+  margin: 0;
+  opacity: 0.4;
+  text-transform: lowercase;
 }

@@ -55,9 +55,10 @@ class UserStore {
       this.isAuthenticated = true;
       this.username = username;
       this.first_name = first_name;
+      this.role = role;
       this.last_name = last_name;
       this.token = API_Key;
-      this.role = role;
+
       console.log("Аутентификация прошла успешно!");
     } else {
       alert("Зайдите еще раз!");
