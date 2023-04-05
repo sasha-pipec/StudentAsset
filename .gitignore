@@ -5,11 +5,11 @@ media/
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/front/node_modules
-/front/public
-/front/src
-/front/package-lock.json
-/front/package.json
-/front/README.md
+front/node_modules/
+front/public/
+front/src/
+front/package-lock.json
+front/package.json
+front/README.md
 Python-3.10.0rc2.tgz
 Python-3.10.0rc2/
