@@ -10,7 +10,7 @@ from models_app.models import User, Event
 
 class EventCreateServices(ServiceWithResult):
     title = forms.CharField(max_length=100, min_length=5)
-    description = forms.CharField(max_length=100)
+    description = forms.CharField()
     date = forms.DateTimeField(required=False)
     user = ModelField(User)
 
