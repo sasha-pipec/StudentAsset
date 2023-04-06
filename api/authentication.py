@@ -1,3 +1,5 @@
+from rest_framework.permissions import SAFE_METHODS
+
 from models_app.models import User
 from rest_framework import exceptions, authentication
 
@@ -5,6 +7,8 @@ from rest_framework import exceptions, authentication
 class UserApiTokenAuthentication(authentication.BaseAuthentication):
     def authenticate(self, request):
         api_token = request.META.get('HTTP_TOKEN', None)
+        if request.method in SAFE_METHODS:
+            return None
         if not api_token:
             raise exceptions.AuthenticationFailed('Please enter access token')
         try:

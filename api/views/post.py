@@ -12,6 +12,7 @@ from api.services.post.show import PostShowServices
 
 
 class PostCreateListView(APIView):
+
     def get(self, request, *args, **kwargs):
         outcome = ServiceOutcome(PostListServices, request.query_params.dict())
         return Response(
