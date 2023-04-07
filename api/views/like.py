@@ -4,6 +4,7 @@ from rest_framework.views import APIView
 from service_objects.services import ServiceOutcome
 
 from api.serializers.like.show import LikeShowSerializer
+from api.services.like.check import LikeShowServices
 from api.services.like.create import LikeCreateServices
 from api.services.like.delete import LikeDeleteServices
 
@@ -16,3 +17,9 @@ class LikeCreateDeleteView(APIView):
     def delete(self, request, *args, **kwargs):
         ServiceOutcome(LikeDeleteServices, kwargs | {"user": request.user})
         return Response({"INFO": True}, status=status.HTTP_200_OK)
+
+
+class LikeCheckView(APIView):
+    def get(self, request, *args, **kwargs):
+        outcome = ServiceOutcome(LikeShowServices, kwargs | request.query_params.dict())
+        return Response({"INFO": outcome.result}, status=status.HTTP_200_OK)

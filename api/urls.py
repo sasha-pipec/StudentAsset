@@ -1,7 +1,7 @@
 from django.urls import path
 from conf.yasg import urlpatterns as doc_urls
 
-from api.views.like import LikeCreateDeleteView
+from api.views.like import LikeCreateDeleteView, LikeCheckView
 from api.views.post import PostCreateListView
 from api.views.post import PostShowChangeDeleteView
 from api.views.user import UserLoginView, UserListView, UserShowView, UserAuthView
@@ -17,6 +17,7 @@ urlpatterns = [
     # post
     path('posts/', PostCreateListView.as_view(), name="posts"),
     path('posts/<int:id>/', PostShowChangeDeleteView.as_view(), name="posts_id"),
+    path('posts/<int:id>/like/', LikeCheckView.as_view(), name="like_show"),
     path('posts/<int:id>/like_toggle/', LikeCreateDeleteView.as_view(), name="post_like"),
 
     # events
