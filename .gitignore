@@ -1,6 +1,7 @@
 .idea/
 pycache/
 __pycache__/
+deploy.exe
 .env
 media/
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
