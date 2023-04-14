@@ -36,7 +36,7 @@ class UserLoginService(ServiceWithResult):
             return User.objects.create(
                 username=self.cleaned_data['username'],
                 password=self.cleaned_data['password'],
-                group=request['user']['groups'][0]['codename'],
+                group=request['user']['groups'][0]['codename'] if request['user']['groups'] else "Группы нет",
                 first_name=request['user']['first_name'],
                 last_name=request['user']['last_name'],
                 role=ROLES.get(request['role'], User.student),
