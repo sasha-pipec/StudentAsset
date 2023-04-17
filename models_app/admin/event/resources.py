@@ -7,7 +7,7 @@ from models_app.models import Event
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
     fieldsets = [
-        ("Общая информация", {'fields': ['title', 'description', 'date', 'status']}),
+        ("Общая информация", {'fields': ['title', 'description', 'date', 'status', 'image']}),
         ('Прочая информация',
          {'fields': ['created_at', 'updated_at', 'user']}),
     ]
