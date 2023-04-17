@@ -1,21 +1,25 @@
 from rest_framework import serializers
 
-from api.serializers.selection.list import SelectionListSerializer
 from api.serializers.user.show import UserShowSerializer
 from models_app.models import Event
-from models_app.models import Selection
 
 
 class EventListSerializer(serializers.ModelSerializer):
     user = UserShowSerializer(read_only=True)
-    selection = serializers.SerializerMethodField()
+    vote = serializers.SerializerMethodField()
 
     class Meta:
         model = Event
-        fields = "__all__"
+        fields = (
+            "title",
+            "description",
+            "date",
+            "created_at",
+            "updated_at",
+            "status",
+            "user",
+            "vote",
+        )
 
-    def get_selection(self, obj):
-        return SelectionListSerializer(
-            Selection.objects.filter(event=obj),
-            many=True
-        ).data
+    def get_vote(self, obj):
+        return obj.events.all()[0].choice if obj.events.all() else None

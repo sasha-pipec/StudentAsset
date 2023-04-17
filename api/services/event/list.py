@@ -2,10 +2,11 @@ import json
 
 from django import forms
 from django.core.paginator import Paginator
+from django.db.models import Prefetch
 from service_objects.services import ServiceWithResult
 
 from conf.settings.rest_framework import REST_FRAMEWORK
-from models_app.models import Event
+from models_app.models import Event, Vote, User
 
 
 class EventListServices(ServiceWithResult):
@@ -13,6 +14,7 @@ class EventListServices(ServiceWithResult):
     filter = forms.CharField(required=False)
     page = forms.IntegerField(required=False, min_value=1)
     per_page = forms.IntegerField(required=False, min_value=1)
+    token = forms.CharField(required=False)
 
     def process(self):
         self._paginated_regions()
@@ -36,7 +38,12 @@ class EventListServices(ServiceWithResult):
         }
 
     @property
+    def _user(self):
+        return User.objects.get(API_Key=self.cleaned_data["token"])
+
+    @property
     def _events(self):
-        if self.cleaned_data.get('filter', None) == "Approved":
-            return Event.objects.filter(status=Event.APPROVED).order_by(self.cleaned_data["order"] or "id")
-        return Event.objects.all().order_by(self.cleaned_data["order"] or "id")
+        queryset = Event.objects.filter(status=Event.APPROVED).order_by(self.cleaned_data["order"] or "id")
+        if self.cleaned_data.get("token"):
+            queryset = queryset.prefetch_related(Prefetch('events', queryset=Vote.objects.filter(user=self._user)))
+        return queryset

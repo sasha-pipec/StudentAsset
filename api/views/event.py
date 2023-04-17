@@ -10,7 +10,6 @@ from api.docs.event import EVENT_CREATE_VIEW
 from api.docs.event import EVENT_APPROVE_VIEW
 from api.docs.event import EVENT_CANCEL_VIEW
 from api.serializers.event.list import EventListSerializer
-from api.serializers.selection.list import SelectionListSerializer
 from api.serializers.vote.show import VoteShowSerializers
 from api.services.event.create import EventCreateServices
 from api.services.event.approve import EventApproveServices
@@ -23,7 +22,7 @@ class EventVoteView(APIView):
 
     @swagger_auto_schema(**EVENT_VOTE_VIEW)
     def post(self, request, *args, **kwargs):
-        outcome = ServiceOutcome(EventVoteServices, kwargs | {"user": request.user})
+        outcome = ServiceOutcome(EventVoteServices, kwargs | {"user": request.user} | request.POST.dict())
         return Response(VoteShowSerializers(outcome.result).data, status=status.HTTP_200_OK)
 
 
@@ -46,8 +45,7 @@ class EventCreateListView(APIView):
         outcome = ServiceOutcome(EventCreateServices, request.POST.dict() | {"user": request.user})
         return Response(
             {
-                "Event": EventListSerializer(outcome.result["event"]).data,
-                "Selections": SelectionListSerializer(outcome.result["selections"], many=True).data,
+                "Event": EventListSerializer(outcome.result).data,
             },
             status=status.HTTP_200_OK
         )

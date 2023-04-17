@@ -3,13 +3,6 @@ from django.contrib.admin import TabularInline
 
 from models_app.models import Event
 
-from models_app.models import Selection
-
-
-class SelectionAdmin(TabularInline):
-    model = Selection
-    extra = 0
-
 
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
@@ -31,4 +24,3 @@ class EventAdmin(admin.ModelAdmin):
         "title",
     )
     ordering = ("id", "created_at", "updated_at")
-    inlines = [SelectionAdmin, ]
