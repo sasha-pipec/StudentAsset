@@ -9,6 +9,7 @@ class EventCreateServices(ServiceWithResult):
     title = forms.CharField(max_length=100, min_length=5)
     description = forms.CharField()
     date = forms.DateTimeField(required=False)
+    image = forms.ImageField()
     user = ModelField(User)
 
     def process(self):
@@ -20,5 +21,6 @@ class EventCreateServices(ServiceWithResult):
         return Event.objects.create(
             title=self.cleaned_data["title"],
             description=self.cleaned_data["description"],
+            image=self.cleaned_data["image"],
             user=self.cleaned_data["user"]
         )
