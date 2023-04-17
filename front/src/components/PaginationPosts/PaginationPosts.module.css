@@ -1,0 +1,56 @@
+.navigation_bar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  height: 42px;
+  align-items: center;
+  margin-top: 50px;
+}
+.navigation_arrow {
+  border: 0px;
+  background: transparent;
+  cursor: pointer;
+  width: 146px;
+  height: 15px;
+}
+.navigation_btns {
+  border: 0px;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  gap: 10px;
+}
+.btn {
+  border: 0px;
+  background: transparent;
+  cursor: pointer;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 140%;
+  text-transform: lowercase;
+  color: #000000;
+  opacity: 0.6;
+}
+.active {
+  border: 0px;
+  background: transparent;
+  cursor: pointer;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 140%;
+  text-transform: lowercase;
+  color: #000000;
+  opacity: 1;
+}
+.btn:hover {
+  opacity: 1;
+}
+.navigation_arrow img:hover {
+  width: 100px;
+
+  height: 15px;
+}
