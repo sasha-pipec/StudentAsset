@@ -7,18 +7,18 @@ from models_app.models import Vote
 class VoteAdmin(admin.ModelAdmin):
     fields = [
         "id",
-        "selection",
         "user",
+        "choice",
+        "event",
     ]
-    list_filter = ('selection', )
     list_display = [
         "id",
-        "selection",
         "user",
+        "choice",
     ]
     readonly_fields = ["id", ]
     list_display_links = (
         "id",
-        "selection",
+        "user",
     )
-    ordering = ("id", "selection", )
+    ordering = ("id", "choice")
