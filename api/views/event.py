@@ -42,7 +42,7 @@ class EventCreateListView(APIView):
 
     @swagger_auto_schema(**EVENT_CREATE_VIEW)
     def post(self, request, *args, **kwargs):
-        outcome = ServiceOutcome(EventCreateServices, request.POST.dict() | {"user": request.user})
+        outcome = ServiceOutcome(EventCreateServices, request.POST.dict() | {"user": request.user}, request.FILES)
         return Response(
             {
                 "Event": EventListSerializer(outcome.result).data,

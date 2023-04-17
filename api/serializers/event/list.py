@@ -14,6 +14,7 @@ class EventListSerializer(serializers.ModelSerializer):
             "title",
             "description",
             "date",
+            "image",
             "created_at",
             "updated_at",
             "status",
