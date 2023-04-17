@@ -1,0 +1,145 @@
+.header {
+  width: 100%;
+  height: 110px;
+  padding: 40px 60px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+.logo {
+  font-size: 24px;
+  line-height: 120%;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+  color: #000000;
+  text-decoration: none;
+}
+.navigation {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 140%;
+  text-transform: lowercase;
+  color: #000000;
+  opacity: 0.6;
+  text-decoration: none;
+  padding: 4px 6px;
+}
+.nav_container {
+  display: flex;
+  gap: 30px;
+}
+.navigation:hover {
+  opacity: 1;
+}
+.active-link {
+  background: #000000;
+  color: #ffffff;
+  font-size: 30px;
+}
+.header__btn_login {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 4px 6px;
+  gap: 10px;
+
+  width: 58px;
+  height: 30px;
+
+  opacity: 0.6;
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+}
+.header__btn_text {
+  font-size: 16px;
+  margin: 0;
+  width: 100%;
+  text-align: center;
+}
+.btn_container {
+  height: 52px;
+  max-height: 52px;
+}
+.header__btn {
+  width: fit-content;
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+  text-align: left;
+  padding: 0;
+  height: 100%;
+}
+.header__btn_title {
+  margin: 0;
+  font-size: 16px;
+  line-height: 140%;
+  text-transform: lowercase;
+}
+.header__btn_subtitle {
+  margin: 0;
+  opacity: 0.4;
+  text-transform: lowercase;
+}
+.footer {
+  background-color: #000000;
+  height: 400px;
+
+  bottom: 0;
+  margin-top: 80px;
+}
+.footerContainer {
+  padding: 70px 60px;
+  width: 1440px;
+  margin: 0 auto;
+  display: flex;
+  gap: 275px;
+}
+
+.footer_firstRow {
+  display: flex;
+  gap: 30px;
+  border-bottom: 1px solid #323232;
+  max-width: 275px;
+  padding: 0 6px;
+  padding-bottom: 10px;
+}
+.footer_firstRow div {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.footerLink__title {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 140%;
+  /* or 22px */
+
+  text-transform: lowercase;
+
+  /* link_title */
+
+  color: rgba(255, 255, 255, 0.42);
+  width: fit-content;
+}
+.footerLink {
+  text-decoration: none;
+  color: #ffffff;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 140%;
+  text-transform: lowercase;
+  opacity: 0.7;
+  width: fit-content;
+}
+.footer_secondRow {
+  display: flex;
+  flex-direction: column;
+}
+.footer a:hover {
+  opacity: 1;
+}
