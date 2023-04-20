@@ -19,12 +19,41 @@ code {
 }
 .postlist {
   display: grid;
-  grid-template-columns: repeat(3, 420px);
-  column-gap: 30px;
   row-gap: 48px;
+  column-gap: 30px;
   justify-items: stretch;
   align-items: stretch;
   grid-auto-columns: minmax(420px, 420px);
   grid-auto-rows: minmax(420px, 420px);
   width: 100%;
+}
+@media (max-width: 1000px) {
+  .postlist {
+    column-gap: 20px;
+    row-gap: 40px;
+    grid-template-columns: repeat(3, 280px);
+    grid-auto-columns: minmax(280px, 280px);
+    grid-auto-rows: minmax(314px, 314px);
+  }
+  .imageBackground {
+    min-height: 232px;
+  }
+}
+
+@media (max-width: 768px) {
+  .postlist {
+    row-gap: 30px;
+    grid-template-columns: repeat(3, 202.67px);
+    grid-auto-columns: minmax(202.67px, 202.67px);
+    grid-auto-rows: minmax(240px, 240px);
+  }
+}
+@media (max-width: 480px) {
+  .postlist {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+}
+@media (max-width: 360px) {
 }

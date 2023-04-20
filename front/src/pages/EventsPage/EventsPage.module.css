@@ -16,3 +16,33 @@
   color: #000000;
   max-width: 905px;
 }
+@media (max-width: 1000px) {
+  .wrapper {
+    max-width: 880px;
+    margin: 0 60px;
+  }
+}
+@media (max-width: 768px) {
+  .title {
+    max-width: 648px;
+    height: 216px;
+    font-size: 98px;
+  }
+  .wrapper {
+    max-width: 648px;
+
+    margin: 0 60px;
+  }
+}
+@media (max-width: 480px) {
+  .title {
+    max-width: 400px;
+    height: 144px;
+    font-size: 60px;
+  }
+  .wrapper {
+    max-width: 400px;
+
+    margin: 0 auto;
+  }
+}

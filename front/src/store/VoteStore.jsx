@@ -5,8 +5,8 @@ import axios from "axios";
 configure({
   enforceActions: "never",
 });
-class PostsStore {
-  posts = [];
+class VoteStore {
+  VotePosts = [];
   pages = [];
   CurrentPage = "";
   singlePost = [];
@@ -140,7 +140,30 @@ class PostsStore {
     const formattedDateTime = `${formattedDate} / ${formattedTime}`;
     return formattedDateTime;
   };
+  createEvent = async (data, imageData) => {
+    console.log(imageData.get("image"));
+    if (UserStore.isAuthenticated) {
+      try {
+        await axios.post(
+          `http://api.connect.tgiek.ru/api/events/`,
+
+          imageData,
+
+          {
+            headers: {
+              token: UserStore.token,
+              "Content-Type": "multipart/form-data",
+            },
+          },
+        );
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      alert("Войдите в аккаунт!");
+    }
+  };
 }
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default new PostsStore();
+export default new VoteStore();
