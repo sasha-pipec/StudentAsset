@@ -30,3 +30,9 @@
   color: #000000;
   transition: background-color 0.2s ease-in-out;
 }
+@media (max-width: 1000px) {
+  .like,
+  .dislike {
+    width: 100%;
+  }
+}

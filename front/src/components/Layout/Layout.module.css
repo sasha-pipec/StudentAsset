@@ -143,3 +143,39 @@
 .footer a:hover {
   opacity: 1;
 }
+
+@media (max-width: 1000px) {
+  .navigation {
+    font-size: 14px;
+  }
+  .footer_firstRowm *,
+  .footer_secondRow * {
+    font-size: 14px;
+  }
+  .footerContainer {
+    gap: 140px;
+    height: 386px;
+    max-width: 100%;
+  }
+}
+@media (max-width: 1000px) {
+  .footerContainer {
+    gap: 86px;
+
+    max-width: 100%;
+  }
+
+  .footer_firstRowm *,
+  .footer_secondRow * {
+    font-size: 12px;
+  }
+}
+@media (max-width: 480px) {
+  .footerContainer {
+    flex-direction: column;
+    gap: 80px;
+  }
+  .footer {
+    height: 478px;
+  }
+}

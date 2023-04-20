@@ -82,3 +82,64 @@ Link {
 .bigItem:hover .image {
   transform: scale(1.2);
 }
+@media (max-width: 1000px) {
+  .item {
+    width: 280px;
+    height: 314px;
+  }
+  .bigItem_2,
+  .bigItem {
+    width: 580px;
+    height: 668px;
+  }
+  .title {
+    font-size: 20px;
+    max-height: 42px;
+  }
+  .date {
+    padding: 10px 0;
+  }
+}
+@media (max-width: 786px) {
+  .item {
+    width: 202.67px;
+    height: 240px;
+  }
+  .bigItem_2,
+  .bigItem {
+    width: 428px;
+    height: 510px;
+  }
+  .title {
+    font-size: 20px;
+    max-height: 42px;
+  }
+  .date {
+    font-size: 12px;
+    padding: 8px 0;
+    height: 29px;
+  }
+  .imageBackground {
+    height: 178px;
+  }
+}
+@media (max-width: 480px) {
+  .item,
+  .bigItem_2,
+  .bigItem {
+    width: 400px;
+    height: 360px;
+  }
+  .imageBackground {
+    height: 290px;
+  }
+  .title {
+    font-size: 15px;
+    max-height: 42px;
+  }
+  .date {
+    font-size: 12px;
+    padding: 10px 0;
+    height: 29px;
+  }
+}
