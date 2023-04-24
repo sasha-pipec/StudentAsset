@@ -56,7 +56,47 @@
 .imageBackground:hover div {
   transform: scale(1.2);
 }
-.slider {
-  width: 1000px;
-  height: 50px;
+
+@media (max-width: 1000px) {
+  .title {
+    font-size: 42px;
+    width: 387px;
+    height: 100px;
+  }
+  .titleContainer {
+    max-width: 386px;
+  }
+  .imageBackground,
+  .imageBackground::before {
+    width: 454px;
+    height: 545px;
+  }
+  .description,
+  .date {
+    font-size: 14px;
+  }
+}
+@media (max-width: 768px) {
+  .imageBackground,
+  .imageBackground::before {
+    width: 369px;
+    height: 443px;
+  }
+  .titleContainer {
+    max-width: 249px;
+    height: 356px;
+  }
+  .title {
+    font-size: 26px;
+    width: 249px;
+    height: 62px;
+    margin-bottom: 40px;
+  }
+  .description,
+  .date {
+    font-size: 12px;
+  }
+  .description {
+    margin-bottom: 70px;
+  }
 }
