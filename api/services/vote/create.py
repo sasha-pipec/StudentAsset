@@ -27,10 +27,12 @@ class EventVoteServices(ServiceWithResult):
     def _create_vote(self):
         return Vote.objects.create(
             user=self.cleaned_data["user"],
-            choice=Vote.LIKE if self.cleaned_data["vote"] == "like" else Vote.DISLIKE
+            choice=Vote.LIKE if self.cleaned_data["vote"] == "like" else Vote.DISLIKE,
+            event=self._event,
         )
 
     @property
+    @lru_cache
     def _event(self):
         return Event.objects.get(id=self.cleaned_data["id"])
 
