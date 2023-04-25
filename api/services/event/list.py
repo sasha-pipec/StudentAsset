@@ -48,7 +48,7 @@ class EventListServices(ServiceWithResult):
     def _events(self):
         queryset = Event.objects.filter(status=Event.APPROVED).order_by(self.cleaned_data["order"] or "id")
         if self.cleaned_data.get("token"):
-            queryset = queryset.filter(
+            queryset = queryset.exclude(
                 events__in=Vote.objects.filter(user=self._user)
             )
         return queryset
