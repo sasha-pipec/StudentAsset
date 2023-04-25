@@ -15,6 +15,7 @@ class VoteAdmin(admin.ModelAdmin):
         "id",
         "user",
         "choice",
+        "event",
     ]
     readonly_fields = ["id", ]
     list_display_links = (

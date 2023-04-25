@@ -27,10 +27,12 @@ class EventVoteServices(ServiceWithResult):
     def _create_vote(self):
         return Vote.objects.create(
             user=self.cleaned_data["user"],
-            choice=Vote.LIKE if self.cleaned_data["vote"] == "like" else Vote.DISLIKE
+            choice=Vote.LIKE if self.cleaned_data["vote"] == "like" else Vote.DISLIKE,
+            event=self._event,
         )
 
     @property
+    @lru_cache
     def _event(self):
         return Event.objects.get(id=self.cleaned_data["id"])
 
@@ -40,6 +42,6 @@ class EventVoteServices(ServiceWithResult):
                                   response_status=status.HTTP_400_BAD_REQUEST)
 
     def check_vote_user(self):
-        if Vote.objects.filter(user=self.cleaned_data["user"]).exists():
+        if Vote.objects.filter(user=self.cleaned_data["user"], event_id=self._event).exists():
             raise ValidationError(message="You have already voted for this event",
                                   response_status=status.HTTP_400_BAD_REQUEST)
