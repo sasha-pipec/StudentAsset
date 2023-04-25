@@ -1,5 +1,31 @@
-import React from "react";
+import React, { useEffect } from "react";
 import classes from "./EventList.module.css";
-export const EventList = () => {
-  return <div className={classes.wrapper}></div>;
-};
+import PostsStore from "../../store/PostsStore";
+import VoteStore from "../../store/VoteStore";
+import { EventItem } from "../EventItem/EventItem";
+import { observer } from "mobx-react-lite";
+import { PaginationEvents } from "../PaginationEvents/PaginationEvents";
+export const EventList = observer(() => {
+  let page = 1;
+  useEffect(() => {
+    VoteStore.getEvents(page);
+  }, []);
+  console.log(VoteStore.VotePosts);
+  return (
+    <>
+      <div className={classes.eventList}>
+        {VoteStore.VotePosts.map((el, index) => (
+          <EventItem
+            key={index + 1}
+            index={el.id}
+            img={el.image}
+            title={el.title}
+            date={el.date}
+            description={el.description}
+          />
+        ))}
+      </div>
+      {/* <PaginationEvents /> */}
+    </>
+  );
+});
