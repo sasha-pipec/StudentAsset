@@ -18,11 +18,11 @@ class Vote(models.Model):
     event = models.ForeignKey('Event', on_delete=models.CASCADE, verbose_name='Событие', related_name="events")
 
     def __str__(self):
-        return f'{self.user.username} - {self.choice}'
+        return f'{self.user} - {self.choice} - {self.event}'
 
     class Meta:
         db_table = 'votes'
         app_label = "models_app"
-        unique_together = ("user", "choice")
+        unique_together = ("user", "event")
         verbose_name = 'Vote'
         verbose_name_plural = 'Votes'
