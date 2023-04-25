@@ -42,6 +42,6 @@ class EventVoteServices(ServiceWithResult):
                                   response_status=status.HTTP_400_BAD_REQUEST)
 
     def check_vote_user(self):
-        if Vote.objects.filter(user=self.cleaned_data["user"]).exists():
+        if Vote.objects.filter(user=self.cleaned_data["user"], event_id=self._event).exists():
             raise ValidationError(message="You have already voted for this event",
                                   response_status=status.HTTP_400_BAD_REQUEST)
