@@ -1,12 +1,15 @@
 import json
+from functools import lru_cache
 
 from django import forms
 from django.core.paginator import Paginator
-from django.db.models import Prefetch
+from django.db.models import Value
 from service_objects.services import ServiceWithResult
 
 from conf.settings.rest_framework import REST_FRAMEWORK
 from models_app.models import Event, Vote, User
+
+from django.db.models import Subquery, OuterRef
 
 
 class EventListServices(ServiceWithResult):
@@ -45,5 +48,9 @@ class EventListServices(ServiceWithResult):
     def _events(self):
         queryset = Event.objects.filter(status=Event.APPROVED).order_by(self.cleaned_data["order"] or "id")
         if self.cleaned_data.get("token"):
-            queryset = queryset.prefetch_related(Prefetch('events', queryset=Vote.objects.filter(user=self._user)))
+            queryset = queryset.annotate(
+                vote=Subquery(
+                    Vote.objects.filter(user=self._user, event_id=OuterRef("id")).values("choice")
+                )
+            )
         return queryset

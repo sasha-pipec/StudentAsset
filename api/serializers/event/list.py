@@ -23,4 +23,4 @@ class EventListSerializer(serializers.ModelSerializer):
         )
 
     def get_vote(self, obj):
-        return obj.events.all()[0].choice if obj.events.all() else None
+        return getattr(obj, "vote", None)

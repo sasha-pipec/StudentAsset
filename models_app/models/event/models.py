@@ -20,7 +20,7 @@ class Event(models.Model):
     )
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, verbose_name='Статус', default=ON_MODERATION)
     user = models.ForeignKey("User", on_delete=models.SET_NULL, verbose_name='Пользователь', null=True)
-    image = models.ImageField(upload_to="events/", verbose_name="Изображение", null=True)
+    image = models.ImageField(upload_to="events/", verbose_name="Изображение")
 
     def __str__(self):
         return self.title
