@@ -1,15 +1,13 @@
 import json
-from functools import lru_cache
 
 from django import forms
 from django.core.paginator import Paginator
-from django.db.models import Value
+from django.db import models
+from django.db.models import Sum, Case, When
 from service_objects.services import ServiceWithResult
 
 from conf.settings.rest_framework import REST_FRAMEWORK
 from models_app.models import Event, Vote, User
-
-from django.db.models import Subquery, OuterRef
 
 
 class EventListServices(ServiceWithResult):
@@ -46,7 +44,15 @@ class EventListServices(ServiceWithResult):
 
     @property
     def _events(self):
-        queryset = Event.objects.filter(status=Event.APPROVED).order_by(self.cleaned_data["order"] or "id")
+        queryset = Event.objects.filter(status=Event.APPROVED).order_by(self.cleaned_data["order"] or "id").annotate(
+            total_votes=Sum(
+                Case(
+                    When(events__choice='like', then=1),
+                    default=0,
+                    output_field=models.IntegerField(),
+                )
+            )
+        )
         if self.cleaned_data.get("token"):
             queryset = queryset.exclude(
                 events__in=Vote.objects.filter(user=self._user)
