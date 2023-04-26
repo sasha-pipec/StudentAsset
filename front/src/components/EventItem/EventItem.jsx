@@ -1,7 +1,15 @@
 import React, { useState } from "react";
 import classes from "./EventItem.module.css";
 import VoteStore from "../../store/VoteStore";
-export const EventItem = ({ index, img, title, date, description }) => {
+import UserStore from "../../store/UserStore";
+export const EventItem = ({
+  index,
+  img,
+  title,
+  date,
+  description,
+  total_votes,
+}) => {
   let url = `http://api.connect.tgiek.ru${img}`;
   let rootCl = [classes.item];
   const [isVisible, setVisible] = useState(true);
@@ -10,9 +18,12 @@ export const EventItem = ({ index, img, title, date, description }) => {
     console.log("скрыл");
   }
   function clickHendler(data) {
-    setVisible(false);
-    console.log(isVisible);
-    VoteStore.likeEvent(index, data);
+    if (UserStore.isAuthenticated) {
+      setVisible(false);
+      VoteStore.likeEvent(index, data);
+    } else {
+      alert("войдите в аккаунт!");
+    }
   }
   const image = {
     backgroundImage: `url(${url})`,
@@ -23,12 +34,25 @@ export const EventItem = ({ index, img, title, date, description }) => {
     backgroundSize: "cover",
     transition: "transform 0.2s ease-in-out",
   };
-
+  function pluralizeLikes(count) {
+    const lastDigit = count % 10;
+    const isException = count >= 11 && count <= 14;
+    if (lastDigit === 1 && !isException) {
+      return "лайк";
+    } else if ([2, 3, 4].includes(lastDigit) && !isException) {
+      return "лайка";
+    } else {
+      return "лайков";
+    }
+  }
   return (
     <>
       {isVisible ? (
         <div className={rootCl}>
           <div className={classes.imageBackground}>
+            <p className={classes.total_likes}>
+              {total_votes} {pluralizeLikes(total_votes)}
+            </p>
             <img src={url} alt="" className={classes.image} />
           </div>
           <div className={classes.text}>

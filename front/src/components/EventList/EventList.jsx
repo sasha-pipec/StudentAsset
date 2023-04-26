@@ -4,7 +4,7 @@ import PostsStore from "../../store/PostsStore";
 import VoteStore from "../../store/VoteStore";
 import { EventItem } from "../EventItem/EventItem";
 import { observer } from "mobx-react-lite";
-import { PaginationEvents } from "../PaginationEvents/PaginationEvents";
+
 export const EventList = observer(() => {
   let page = 1;
   useEffect(() => {
@@ -22,6 +22,7 @@ export const EventList = observer(() => {
             title={el.title}
             date={el.date}
             description={el.description}
+            total_votes={el.total_votes}
           />
         ))}
       </div>

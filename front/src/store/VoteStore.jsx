@@ -9,10 +9,7 @@ class VoteStore {
   VotePosts = [];
   pages = [];
   CurrentPage = "";
-  singlePost = [];
-  singlePostIsLiked = "";
   urlImage = "";
-  postSlider = [];
   constructor() {
     makeAutoObservable(this);
   }
@@ -43,20 +40,6 @@ class VoteStore {
       console.log("error");
     }
   };
-  getPostSlider = async () => {
-    const response = await axios.get(
-      `http://api.connect.tgiek.ru/api/posts/?per_page=10&page=1`,
-    );
-    if (response.status === 200) {
-      const { posts } = response.data;
-
-      this.postSlider = posts;
-      console.log("Посты получены");
-    } else {
-      console.log("error");
-    }
-    console.log(this.postSlider);
-  };
 
   likeEvent = async (id, like) => {
     console.log(id, like);
@@ -81,6 +64,7 @@ class VoteStore {
       alert("Войдите в аккаунт!");
     }
   };
+
   datePost = (datePost) => {
     const date = new Date(datePost);
     const formattedDate = `${date.getDate().toString().padStart(2, "0")}.${(
@@ -95,6 +79,7 @@ class VoteStore {
     const formattedDateTime = `${formattedDate} / ${formattedTime}`;
     return formattedDateTime;
   };
+
   createEvent = async (data, imageData) => {
     console.log(imageData.get("image"));
     if (UserStore.isAuthenticated) {
