@@ -53,6 +53,7 @@ export const CreateEvent = () => {
         <input
           value={value}
           type="text"
+          maxLength="28"
           placeholder="НАЗВАНИЕ СОБЫТИЯ"
           className={classes.name}
           onChange={(e) => setValue(e.target.value)}
@@ -63,6 +64,7 @@ export const CreateEvent = () => {
           onChange={(e) => {
             setDescription(e.target.value);
           }}
+          maxLength="300"
           cols="30"
           rows="10"
           placeholder="ОПИСАНИЕ"></textarea>

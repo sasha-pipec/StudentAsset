@@ -16,13 +16,18 @@ class VoteStore {
   constructor() {
     makeAutoObservable(this);
   }
-  getPosts = async (page) => {
+  getEvents = async (page) => {
     this.CurrentPage = page;
+    let token = localStorage.getItem("token");
+    if (token === null) {
+      token = "";
+    }
+
     const response = await axios.get(
-      `http://api.connect.tgiek.ru/api/posts/?per_page=12&page=${page}`,
+      `http://api.connect.tgiek.ru/api/events/?token=${token}&per_page=999`,
     );
     if (response.status === 200) {
-      const { posts, page_data } = response.data;
+      const { Event, page_data } = response.data;
       let page_data_new = page_data
         .replace(/[/"]/g, "")
         .replace("[", "")
@@ -31,12 +36,12 @@ class VoteStore {
 
       let arr_pages = page_data_new.split(",");
       this.pages = arr_pages;
-      this.posts = posts;
+      this.VotePosts = Event;
       console.log("Посты получены");
+      console.log(this.VotePosts, this.pages);
     } else {
       console.log("error");
     }
-    console.log(this.posts);
   };
   getPostSlider = async () => {
     const response = await axios.get(
@@ -52,70 +57,20 @@ class VoteStore {
     }
     console.log(this.postSlider);
   };
-  getSinglePost = async (id) => {
-    const response = await axios.get(
-      `http://api.connect.tgiek.ru/api/posts/${id}/`,
-    );
-    if (response.status === 200) {
-      const { post } = response.data;
-      this.singlePost = post;
-      console.log("Пост получен");
 
-      const img = this.singlePost.image;
-      this.urlImage = `http://api.connect.tgiek.ru/${img}`;
-    } else {
-      console.log("error");
-    }
+  likeEvent = async (id, like) => {
+    console.log(id, like);
     if (UserStore.isAuthenticated) {
-      const token = UserStore.token;
-      const responseLike = await axios.get(
-        `http://api.connect.tgiek.ru/api/posts/${id}/like/?token=${token}`,
-      );
-      if (responseLike.status === 200) {
-        console.log("лайк получен");
-
-        const { INFO } = await responseLike.data;
-        this.singlePostIsLiked = INFO;
-        if (INFO) {
-          console.log("лайкнут");
-          LikeToggleStore.setLike(true);
-        } else {
-          console.log("дислайкнут");
-          LikeToggleStore.setLike(false);
-        }
-      } else {
-        console.log(responseLike);
-      }
-    }
-  };
-  unlikePost = async (id) => {
-    if (UserStore.isAuthenticated) {
-      try {
-        await axios.delete(
-          `http://api.connect.tgiek.ru/api/posts/${id}/like_toggle/`,
-          {
-            headers: {
-              token: UserStore.token,
-            },
-          },
-        );
-      } catch (error) {
-        console.error(error);
-      }
-    } else {
-      alert("Войдите в аккаунт!");
-    }
-  };
-
-  likePost = async (id) => {
-    if (UserStore.isAuthenticated) {
+      const data = { vote: `${like}` };
+      console.log(data);
       try {
         await axios.post(
-          `http://api.connect.tgiek.ru/api/posts/${id}/like_toggle/`,
-          null,
+          `http://api.connect.tgiek.ru/api/events/${id}/vote/`,
+          data,
           {
             headers: {
               token: UserStore.token,
+              "Content-Type": "multipart/form-data",
             },
           },
         );
