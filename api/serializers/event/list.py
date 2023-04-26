@@ -6,7 +6,7 @@ from models_app.models import Event
 
 class EventListSerializer(serializers.ModelSerializer):
     user = UserShowSerializer(read_only=True)
-    total_votes = serializers.IntegerField()
+    total_votes = serializers.IntegerField(default=0)
 
     class Meta:
         model = Event
