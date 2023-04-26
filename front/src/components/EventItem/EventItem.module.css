@@ -94,3 +94,13 @@
   gap: 21px;
   margin-top: 37px;
 }
+.total_likes {
+  position: absolute;
+  z-index: 3;
+  bottom: 20px;
+  left: 20px;
+  color: #f6f6f6;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 110%;
+}

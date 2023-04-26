@@ -1,12 +1,15 @@
 import React, { useState } from "react";
-import classes from "./CreateEvent.module.css";
+
 import VoteStore from "../../store/VoteStore";
+
+import classes from "./CreateEvent.module.css";
+import UserStore from "../../store/UserStore";
+
 export const CreateEvent = () => {
   const [value, setValue] = useState("");
   const [description, setDescription] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
   const [fileButtonStyle, setFileButtonStyle] = useState({
-    backgroundColor: "#1d1d1d",
     height: "217px",
     width: "100%",
   });
@@ -28,17 +31,26 @@ export const CreateEvent = () => {
   };
 
   const handleSubmit = (event) => {
-    const formData = new FormData();
-    formData.append("title", value);
-    formData.append("description", description);
-    formData.append("image", selectedFile);
-    let data = [value, description];
-    console.log(data);
-    console.log(formData.get("image"));
-    event.preventDefault();
-    VoteStore.createEvent(data, formData);
-
-    // Добавьте здесь логику отправки выбранной фотографии на сервер
+    if (UserStore.isAuthenticated) {
+      const formData = new FormData();
+      formData.append("title", value);
+      formData.append("description", description);
+      formData.append("image", selectedFile);
+      let data = [value, description];
+      console.log(data);
+      console.log(formData.get("image"));
+      event.preventDefault();
+      VoteStore.createEvent(data, formData);
+      setValue("");
+      setDescription("");
+      setFileButtonStyle({
+        backgroundImage: `url(../../images/photo_form.svg)`,
+        height: "217px",
+        width: "100%",
+      });
+    } else {
+      alert("войдите в аккаунт!");
+    }
   };
   return (
     <div className={classes.wrapper}>
@@ -68,7 +80,10 @@ export const CreateEvent = () => {
           cols="30"
           rows="10"
           placeholder="ОПИСАНИЕ"></textarea>
-        <label htmlFor="fileInput" style={fileButtonStyle}>
+        <label
+          htmlFor="fileInput"
+          className={classes.fileInput}
+          style={fileButtonStyle}>
           <input
             id="fileInput"
             className={classes.file}
