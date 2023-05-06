@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 
-import VoteStore from "../../store/VoteStore";
-
 import classes from "./CreateEvent.module.css";
-import UserStore from "../../store/UserStore";
+import store from "../../store/store";
 
 export const CreateEvent = () => {
   const [value, setValue] = useState("");
@@ -31,7 +29,7 @@ export const CreateEvent = () => {
   };
 
   const handleSubmit = (event) => {
-    if (UserStore.isAuthenticated) {
+    if (store.user.isAuthenticated) {
       const formData = new FormData();
       formData.append("title", value);
       formData.append("description", description);
@@ -40,11 +38,11 @@ export const CreateEvent = () => {
       console.log(data);
       console.log(formData.get("image"));
       event.preventDefault();
-      VoteStore.createEvent(data, formData);
+      store.vote.createEvent(data, formData);
       setValue("");
       setDescription("");
       setFileButtonStyle({
-        backgroundImage: `url(../../images/photo_form.svg)`,
+        backgroundImage: `url(../../assets/images/photo_form.svg)`,
         height: "217px",
         width: "100%",
       });

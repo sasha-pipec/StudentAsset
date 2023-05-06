@@ -1,20 +1,19 @@
 import React, { useEffect } from "react";
 import classes from "./EventList.module.css";
-import PostsStore from "../../store/PostsStore";
-import VoteStore from "../../store/VoteStore";
 import { EventItem } from "../EventItem/EventItem";
 import { observer } from "mobx-react-lite";
+import store from "../../store/store";
 
 export const EventList = observer(() => {
   let page = 1;
   useEffect(() => {
-    VoteStore.getEvents(page);
+    store.vote.getEvents(page);
   }, []);
-  console.log(VoteStore.VotePosts);
+  console.log(store.vote.VotePosts);
   return (
     <>
       <div className={classes.eventList}>
-        {VoteStore.VotePosts.map((el, index) => (
+        {store.vote.VotePosts.map((el, index) => (
           <EventItem
             key={index + 1}
             index={el.id}

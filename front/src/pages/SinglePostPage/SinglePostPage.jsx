@@ -1,19 +1,19 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import PostsStore from "../../store/PostsStore";
 import classes from "./SinglePostPage.module.css";
 import { observer } from "mobx-react-lite";
 import { ButtonLike } from "../../components/ButtonLike/ButtonLike";
 import { SliderDrag } from "../../components/SliderPost/SliderDrag";
+import store from "../../store/store";
 const SinglePostPage = observer(() => {
   const { id } = useParams();
   useEffect(() => {
     const getPost = async () => {
-      await PostsStore.getSinglePost(id);
+      await store.posts.getSinglePost(id);
     };
     getPost();
   }, [id]);
-  const url = PostsStore.urlImage;
+  const url = store.posts.urlImage;
 
   const image = {
     backgroundImage: `url(${url})`,
@@ -29,16 +29,19 @@ const SinglePostPage = observer(() => {
       <div>
         <div className={classes.wrapper}>
           <div className={classes.main}>
-            <div className={classes.imageBackground}>
-              <div style={image}> </div>
+            <div className={classes.imageContainer}>
+              <div className={classes.imageBackground}>
+                <img src={url} className={classes.image} alt="" />
+              </div>
             </div>
+
             <div className={classes.titleContainer}>
               <p className={classes.date}>
-                {PostsStore.datePost(PostsStore.singlePost.date)}
+                {store.posts.datePost(store.posts.singlePost.date)}
               </p>
-              <h1 className={classes.title}>{PostsStore.singlePost.title}</h1>
+              <h1 className={classes.title}>{store.posts.singlePost.title}</h1>
               <p className={classes.description}>
-                {PostsStore.singlePost.description}
+                {store.posts.singlePost.description}
                 Lorem ipsum dolor sit amet consectetur adipisicing elit.
                 Mollitia, corporis dolor? Dolor temporibus ullam facere enim
                 reprehenderit commodi numquam deleniti consequatur ratione? Rem

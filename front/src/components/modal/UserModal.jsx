@@ -1,16 +1,15 @@
 import React from "react";
 import classes from "./UserModal.module.css";
-import UserModalStore from "../../store/UserModalStore";
 import { observer } from "mobx-react-lite";
-import UserStore from "../../store/UserStore";
+import store from "../../store/store";
 const UserModal = observer(() => {
   const rootCl = [classes.wrapper];
-  if (UserModalStore.visible) {
+  if (store.userModal.visible) {
     rootCl.push(classes.open);
   }
   function logout() {
-    UserModalStore.setVisible(false);
-    UserStore.logout();
+    store.userModal.setVisible(false);
+    store.user.logout();
   }
   return (
     <div className={rootCl.join(" ")}>

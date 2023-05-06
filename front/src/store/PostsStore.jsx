@@ -1,11 +1,10 @@
 import { makeAutoObservable, configure } from "mobx";
-import UserStore from "./UserStore";
-import LikeToggleStore from "./LikeToggleStore";
-import axios from "axios";
+import axiosConfig from "../utils/axiosConfig";
+import store from "./store";
 configure({
   enforceActions: "never",
 });
-class PostsStore {
+export class PostsStore {
   posts = [];
   pages = [];
   CurrentPage = "";
@@ -18,9 +17,7 @@ class PostsStore {
   }
   getPosts = async (page) => {
     this.CurrentPage = page;
-    const response = await axios.get(
-      `http://api.connect.tgiek.ru/api/posts/?per_page=12&page=${page}`,
-    );
+    const response = await axiosConfig().get(`posts/?per_page=12&page=${page}`);
     if (response.status === 200) {
       const { posts, page_data } = response.data;
       let page_data_new = page_data
@@ -39,9 +36,7 @@ class PostsStore {
     console.log(this.posts);
   };
   getPostSlider = async () => {
-    const response = await axios.get(
-      `http://api.connect.tgiek.ru/api/posts/?per_page=10&page=1`,
-    );
+    const response = await axiosConfig().get(`posts/?per_page=10&page=1`);
     if (response.status === 200) {
       const { posts } = response.data;
 
@@ -53,9 +48,7 @@ class PostsStore {
     console.log(this.postSlider);
   };
   getSinglePost = async (id) => {
-    const response = await axios.get(
-      `http://api.connect.tgiek.ru/api/posts/${id}/`,
-    );
+    const response = await axiosConfig().get(`posts/${id}/`);
     if (response.status === 200) {
       const { post } = response.data;
       this.singlePost = post;
@@ -66,10 +59,10 @@ class PostsStore {
     } else {
       console.log("error");
     }
-    if (UserStore.isAuthenticated) {
-      const token = UserStore.token;
-      const responseLike = await axios.get(
-        `http://api.connect.tgiek.ru/api/posts/${id}/like/?token=${token}`,
+    if (store.user.isAuthenticated) {
+      const token = store.user.token;
+      const responseLike = await axiosConfig().get(
+        `posts/${id}/like/?token=${token}`,
       );
       if (responseLike.status === 200) {
         console.log("лайк получен");
@@ -78,10 +71,10 @@ class PostsStore {
         this.singlePostIsLiked = INFO;
         if (INFO) {
           console.log("лайкнут");
-          LikeToggleStore.setLike(true);
+          store.likeToggle.setLike(true);
         } else {
           console.log("дислайкнут");
-          LikeToggleStore.setLike(false);
+          store.likeToggle.setLike(false);
         }
       } else {
         console.log(responseLike);
@@ -89,16 +82,9 @@ class PostsStore {
     }
   };
   unlikePost = async (id) => {
-    if (UserStore.isAuthenticated) {
+    if (store.user.isAuthenticated) {
       try {
-        await axios.delete(
-          `http://api.connect.tgiek.ru/api/posts/${id}/like_toggle/`,
-          {
-            headers: {
-              token: UserStore.token,
-            },
-          },
-        );
+        await axiosConfig().delete(`posts/${id}/like_toggle/`);
       } catch (error) {
         console.error(error);
       }
@@ -108,17 +94,9 @@ class PostsStore {
   };
 
   likePost = async (id) => {
-    if (UserStore.isAuthenticated) {
+    if (store.user.isAuthenticated) {
       try {
-        await axios.post(
-          `http://api.connect.tgiek.ru/api/posts/${id}/like_toggle/`,
-          null,
-          {
-            headers: {
-              token: UserStore.token,
-            },
-          },
-        );
+        await axiosConfig().post(`posts/${id}/like_toggle/`);
       } catch (error) {
         console.error(error);
       }
@@ -141,6 +119,3 @@ class PostsStore {
     return formattedDateTime;
   };
 }
-
-// eslint-disable-next-line import/no-anonymous-default-export
-export default new PostsStore();

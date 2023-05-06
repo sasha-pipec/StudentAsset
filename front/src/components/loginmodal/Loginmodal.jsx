@@ -1,23 +1,29 @@
-import React from "react";
-import UserStore from "../../store/UserStore";
+import React, { useEffect } from "react";
 import classes from "./Login.module.css";
-import ModalStore from "../../store/ModalStore";
+import store from "../../store/store";
 const Loginmodal = ({ visible }) => {
   function handleSubmit(event) {
     event.preventDefault();
     const username = event.target.username.value;
     const password = event.target.password.value;
     const get_token = event.target.auto_enter.checked;
-    UserStore.login(username, password, get_token);
+    store.user.login(username, password, get_token);
   }
   const rootCl = [classes.wrapper];
   if (visible) {
     rootCl.push(classes.active);
   }
+  useEffect(() => {
+    if (visible) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "visible";
+    }
+  }, [visible]);
   return (
     <aside
       className={rootCl.join(" ")}
-      onClick={() => ModalStore.setVisible(false)}>
+      onClick={() => store.modal.setVisible(false)}>
       <form
         action=""
         className={classes.form}

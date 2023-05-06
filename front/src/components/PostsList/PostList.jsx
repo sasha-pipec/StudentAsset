@@ -1,18 +1,18 @@
 import React, { useEffect } from "react";
-import PostsStore from "../../store/PostsStore";
 import { PostItem } from "../PostItem/PostItem";
 import { observer } from "mobx-react-lite";
 import { PaginationPosts } from "../PaginationPosts/PaginationPosts";
+import store from "../../store/store";
 
 export const PostList = observer(() => {
   let page = 1;
   useEffect(() => {
-    PostsStore.getPosts(page);
+    store.posts.getPosts(page);
   }, []);
   return (
     <>
       <div className="postlist">
-        {PostsStore.posts.map((post, index) => (
+        {store.posts.posts.map((post, index) => (
           <PostItem
             key={index + 1}
             index={index + 1}

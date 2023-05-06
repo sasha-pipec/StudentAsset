@@ -2,7 +2,7 @@ import { makeAutoObservable, configure } from "mobx";
 configure({
   enforceActions: "never",
 });
-class likeToggleStore {
+export class LikeToggleStore {
   isLiked = false;
   constructor() {
     makeAutoObservable(this);
@@ -14,5 +14,3 @@ class likeToggleStore {
     this.isLiked = !this.isLiked;
   }
 }
-// eslint-disable-next-line import/no-anonymous-default-export
-export default new likeToggleStore();

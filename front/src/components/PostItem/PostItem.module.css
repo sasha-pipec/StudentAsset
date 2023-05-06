@@ -1,6 +1,6 @@
 .item {
   display: flex;
-  width: 420px;
+  width: 100%;
   height: 428px;
   flex-direction: column;
   text-decoration: none;
@@ -31,14 +31,17 @@ Link {
   margin: 0;
   height: 46px;
   padding: 10px 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 .bigItem {
   display: flex;
   grid-column: 2 /4;
   grid-row: 2/4;
   flex-direction: column;
-  width: 870px;
-  height: 896px;
+  width: 100%;
+  height: 100%;
   text-decoration: none;
 }
 .bigItem div,
@@ -51,8 +54,8 @@ Link {
   grid-column: 1 /3;
   grid-row: 5/7;
   flex-direction: column;
-  width: 870px;
-  height: 896px;
+  width: 100%;
+  height: 100%;
   text-decoration: none;
 }
 .imageBackground {
@@ -84,13 +87,13 @@ Link {
 }
 @media (max-width: 1000px) {
   .item {
-    width: 280px;
-    height: 314px;
+    width: 100%;
+    height: 100%;
   }
   .bigItem_2,
   .bigItem {
-    width: 580px;
-    height: 668px;
+    width: 100%;
+    height: 100%;
   }
   .title {
     font-size: 20px;
@@ -101,15 +104,6 @@ Link {
   }
 }
 @media (max-width: 786px) {
-  .item {
-    width: 202.67px;
-    height: 240px;
-  }
-  .bigItem_2,
-  .bigItem {
-    width: 428px;
-    height: 510px;
-  }
   .title {
     font-size: 20px;
     max-height: 42px;
@@ -127,7 +121,7 @@ Link {
   .item,
   .bigItem_2,
   .bigItem {
-    width: 400px;
+    width: 100%;
     height: 360px;
   }
   .imageBackground {
@@ -141,5 +135,13 @@ Link {
     font-size: 12px;
     padding: 10px 0;
     height: 29px;
+  }
+}
+@media (max-width: 360px) {
+  .item,
+  .bigItem_2,
+  .bigItem {
+    width: 100%;
+    height: 290px;
   }
 }

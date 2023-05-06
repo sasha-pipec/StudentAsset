@@ -7,8 +7,8 @@ const VotePage = () => {
   return (
     <div className={classes.wrapper}>
       <h1 className={classes.title}>Предложенное студентами</h1>
-      <CreateEvent></CreateEvent>
       <EventList></EventList>
+      <CreateEvent></CreateEvent>
     </div>
   );
 };

@@ -1,11 +1,11 @@
 import { makeAutoObservable, configure } from "mobx";
-import UserStore from "./UserStore";
-import LikeToggleStore from "./LikeToggleStore";
-import axios from "axios";
+
+import axiosConfig from "../utils/axiosConfig";
+import store from "./store";
 configure({
   enforceActions: "never",
 });
-class VoteStore {
+export class VoteStore {
   VotePosts = [];
   pages = [];
   CurrentPage = "";
@@ -20,8 +20,8 @@ class VoteStore {
       token = "";
     }
 
-    const response = await axios.get(
-      `http://api.connect.tgiek.ru/api/events/?token=${token}&per_page=999`,
+    const response = await axiosConfig().get(
+      `events/?token=${token}&per_page=999`,
     );
     if (response.status === 200) {
       const { Event, page_data } = response.data;
@@ -43,20 +43,11 @@ class VoteStore {
 
   likeEvent = async (id, like) => {
     console.log(id, like);
-    if (UserStore.isAuthenticated) {
+    if (store.user.isAuthenticated) {
       const data = { vote: `${like}` };
       console.log(data);
       try {
-        await axios.post(
-          `http://api.connect.tgiek.ru/api/events/${id}/vote/`,
-          data,
-          {
-            headers: {
-              token: UserStore.token,
-              "Content-Type": "multipart/form-data",
-            },
-          },
-        );
+        await axiosConfig().post(`events/${id}/vote/`, data);
       } catch (error) {
         console.error(error);
       }
@@ -82,20 +73,9 @@ class VoteStore {
 
   createEvent = async (data, imageData) => {
     console.log(imageData.get("image"));
-    if (UserStore.isAuthenticated) {
+    if (store.user.isAuthenticated) {
       try {
-        await axios.post(
-          `http://api.connect.tgiek.ru/api/events/`,
-
-          imageData,
-
-          {
-            headers: {
-              token: UserStore.token,
-              "Content-Type": "multipart/form-data",
-            },
-          },
-        );
+        await axiosConfig().post(`events/`, imageData);
       } catch (error) {
         console.error(error);
       }
@@ -104,6 +84,3 @@ class VoteStore {
     }
   };
 }
-
-// eslint-disable-next-line import/no-anonymous-default-export
-export default new VoteStore();

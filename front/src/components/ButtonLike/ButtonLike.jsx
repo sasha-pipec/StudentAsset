@@ -1,25 +1,23 @@
 import React, { useEffect } from "react";
-import PostsStore from "../../store/PostsStore";
 import classes from "./ButtonLike.module.css";
 import { observer } from "mobx-react-lite";
-import UserStore from "../../store/UserStore";
-import LikeToggleStore from "../../store/LikeToggleStore";
+import store from "../../store/store";
 export const ButtonLike = observer(({ id }) => {
   useEffect(() => {
-    if (UserStore.isAuthenticated) {
-      LikeToggleStore.setLike(PostsStore.singlePostIsLiked);
+    if (store.user.isAuthenticated) {
+      store.likeToggle.setLike(store.posts.singlePostIsLiked);
     }
   }, [id]);
 
   const handleLike = async () => {
-    if (UserStore.isAuthenticated) {
-      if (LikeToggleStore.isLiked) {
-        await PostsStore.unlikePost(id);
-        LikeToggleStore.setLike(false);
+    if (store.user.isAuthenticated) {
+      if (store.likeToggle.isLiked) {
+        await store.posts.unlikePost(id);
+        store.likeToggle.setLike(false);
         console.log("ДИЗЛАЙК");
       } else {
-        await PostsStore.likePost(id);
-        LikeToggleStore.setLike(true);
+        await store.posts.likePost(id);
+        store.likeToggle.setLike(true);
         console.log("ЛАЙК");
       }
     } else {
@@ -28,20 +26,20 @@ export const ButtonLike = observer(({ id }) => {
   };
   const token = localStorage.getItem("token");
   if (
-    PostsStore.singlePostIsLiked === true ||
-    PostsStore.singlePostIsLiked === false ||
+    store.posts.singlePostIsLiked === true ||
+    store.posts.singlePostIsLiked === false ||
     token === null
   ) {
     return (
       <>
         <button
-          className={LikeToggleStore.isLiked ? classes.like : classes.dislike}
+          className={store.likeToggle.isLiked ? classes.like : classes.dislike}
           onClick={handleLike}>
-          {LikeToggleStore.isLiked ? "Передумал" : "хочу пойти"}
+          {store.likeToggle.isLiked ? "Передумал" : "хочу пойти"}
         </button>
       </>
     );
   } else {
-    console.log(PostsStore.singlePostIsLiked);
+    console.log(store.posts.singlePostIsLiked);
   }
 });

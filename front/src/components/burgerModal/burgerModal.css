@@ -1,0 +1,12 @@
+.active {
+  opacity: 1;
+  background: #000000;
+  color: #ffffff;
+}
+.active p {
+  color: #ffffff;
+  background: #000000;
+}
+.active svg path {
+  stroke: #ffffff;
+}

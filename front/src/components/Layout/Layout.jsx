@@ -4,13 +4,14 @@ import React from "react";
 import classes from "./Layout.module.css";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import Loginmodal from "../loginmodal/Loginmodal";
-import ModalStore from "../../store/ModalStore";
 import { observer } from "mobx-react-lite";
-import UserStore from "../../store/UserStore";
 import "./Layout.css";
 import UserModal from "../modal/UserModal";
-import UserModalStore from "../../store/UserModalStore";
-import logo from "../../images/logo_footer.svg";
+import logo from "../../assets/images/logo_footer.svg";
+import burgerLogo from "../../assets/images/burger_logo.svg";
+import burgerClose from "../../assets/images/burger_close.svg";
+import store from "../../store/store";
+import BurgerModal from "../burgerModal/burgerModal";
 const Layout = observer(() => {
   return (
     <>
@@ -29,27 +30,45 @@ const Layout = observer(() => {
             обсуждения
           </NavLink>
         </nav>
-        {UserStore.isAuthenticated ? (
+        {store.user.isAuthenticated ? (
           <div className={classes.btn_container}>
             <button
               className={classes.header__btn}
-              onClick={() => UserModalStore.changeVisible()}>
+              onClick={() => store.userModal.changeVisible()}>
               <p className={classes.header__btn_title}>
-                {UserStore.first_name} {UserStore.last_name}
+                {store.user.first_name} {store.user.last_name}
               </p>
-              <p className={classes.header__btn_subtitle}>{UserStore.role}</p>
+              <p className={classes.header__btn_subtitle}>{store.user.role}</p>
             </button>
             <UserModal />
           </div>
         ) : (
           <button
             className={classes.header__btn_login}
-            onClick={() => ModalStore.setVisible(true)}>
+            onClick={() => store.modal.setVisible(true)}>
             <p className={classes.header__btn_text}>войти</p>{" "}
           </button>
         )}
+        {store.modal.burgervisible ? (
+          <button
+            className={classes.burgerBtn}
+            onClick={() => {
+              store.modal.setVisibleBurger(false);
+            }}>
+            <img src={burgerClose} alt="" />
+          </button>
+        ) : (
+          <button
+            className={classes.burgerBtn}
+            onClick={() => {
+              store.modal.setVisibleBurger(true);
+            }}>
+            <img src={burgerLogo} alt="" />
+          </button>
+        )}
       </header>
-      <Loginmodal visible={ModalStore.visible} />
+      <Loginmodal visible={store.modal.visible} />
+      <BurgerModal visible={store.modal.burgervisible}></BurgerModal>
       <Outlet />
       <footer className={classes.footer}>
         <div className={classes.footerContainer}>

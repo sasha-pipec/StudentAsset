@@ -5,14 +5,10 @@ import { MainPage } from "./pages/MainPage/MainPage";
 import { VotePage } from "./pages/VotePage/VotePage";
 import { Layout } from "./components/Layout/Layout";
 import { observer } from "mobx-react-lite";
-import UserStore from "./store/UserStore";
 import { SinglePostPage } from "./pages/SinglePostPage/SinglePostPage";
+import store from "./store/store";
 const App = observer(() => {
-  const token = localStorage.getItem("token");
-  if (token !== null && UserStore.isAuthenticated === false) {
-    UserStore.auth(token);
-  } else {
-  }
+  store.user.auth();
   return (
     <>
       <Routes>

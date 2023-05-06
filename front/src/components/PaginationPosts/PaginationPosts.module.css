@@ -56,6 +56,19 @@
 }
 @media (max-width: 1000px) {
   .navigation_bar {
-    max-width: 100%;
+    max-width: 98%;
+    margin: 0 auto;
+  }
+  .navigation_arrow {
+    padding: 0;
+  }
+}
+@media (max-width: 480px) {
+  .navigation_arrow {
+    width: 68px;
+    padding: 0;
+  }
+  .navigation_arrow img {
+    width: 65px;
   }
 }

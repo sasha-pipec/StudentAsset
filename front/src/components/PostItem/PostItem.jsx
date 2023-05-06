@@ -1,7 +1,7 @@
 import React from "react";
 import classes from "./PostItem.module.css";
 import { Link } from "react-router-dom";
-import PostsStore from "../../store/PostsStore";
+import store from "../../store/store";
 export const PostItem = ({ index, img, title, date, to }) => {
   let url = `http://api.connect.tgiek.ru${img}`;
   let rootCl = [classes.item];
@@ -27,7 +27,7 @@ export const PostItem = ({ index, img, title, date, to }) => {
       <div className={classes.imageBackground}>
         <div className={classes.image} style={image}></div>
       </div>
-      <p className={classes.date}>{PostsStore.datePost(date)}</p>
+      <p className={classes.date}>{store.posts.datePost(date)}</p>
       <p className={classes.title}>{title}</p>
     </Link>
   );

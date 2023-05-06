@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import classes from "./EventItem.module.css";
-import VoteStore from "../../store/VoteStore";
-import UserStore from "../../store/UserStore";
+import store from "../../store/store";
 export const EventItem = ({
   index,
   img,
@@ -18,22 +17,14 @@ export const EventItem = ({
     console.log("скрыл");
   }
   function clickHendler(data) {
-    if (UserStore.isAuthenticated) {
+    if (store.user.isAuthenticated) {
       setVisible(false);
-      VoteStore.likeEvent(index, data);
+      store.vote.likeEvent(index, data);
     } else {
       alert("войдите в аккаунт!");
     }
   }
-  const image = {
-    backgroundImage: `url(${url})`,
-    width: "100%",
-    height: "100%",
-    backgroundRepeat: "no-repeat",
-    backgroundPosition: "center",
-    backgroundSize: "cover",
-    transition: "transform 0.2s ease-in-out",
-  };
+
   function pluralizeLikes(count) {
     const lastDigit = count % 10;
     const isException = count >= 11 && count <= 14;
