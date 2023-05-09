@@ -16,18 +16,15 @@ const Layout = observer(() => {
   return (
     <>
       <header className={classes.header}>
-        <Link className={classes.logo} to="/main">
+        <Link className={classes.logo} to="/">
           Коннект
         </Link>
         <nav className={classes.nav_container}>
           <NavLink className={classes.navigation} to="/vote">
             голосование
           </NavLink>
-          <NavLink className={classes.navigation} to="/">
+          <NavLink className={classes.navigation} to="/events">
             афиша
-          </NavLink>
-          <NavLink className={classes.navigation} to="/dada">
-            обсуждения
           </NavLink>
         </nav>
         {store.user.isAuthenticated ? (
