@@ -2,6 +2,7 @@
   max-width: 1440px;
   margin: 0 auto;
   padding: 60px;
+  overflow: visible;
 }
 .main {
   display: flex;
@@ -66,6 +67,23 @@
 
 .imageBackground:hover img {
   transform: scale(1.2);
+}
+.slider {
+  margin-top: 100px;
+  width: 100vw;
+  position: relative;
+  overflow: hidden;
+}
+.sliderTitle {
+  font-weight: 400;
+  font-size: 64px;
+  line-height: 110%;
+
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+
+  color: #000000;
+  margin-bottom: 50px;
 }
 
 @media (max-width: 1000px) {

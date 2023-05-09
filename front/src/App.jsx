@@ -13,9 +13,9 @@ const App = observer(() => {
     <>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<EventsPage />} />
+          <Route index element={<MainPage />} />
           <Route path="posts/:id" element={<SinglePostPage />} />
-          <Route path="main" element={<MainPage />} />
+          <Route path="events" element={<EventsPage />} />
           <Route path="vote" element={<VotePage />} />
         </Route>
       </Routes>
