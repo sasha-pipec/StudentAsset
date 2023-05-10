@@ -1,0 +1,52 @@
+.weekend {
+  font-size: 14px;
+  line-height: 140%;
+  text-transform: lowercase;
+  color: #c45858;
+}
+.weekday {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 140%;
+  text-transform: lowercase;
+
+  color: #000000;
+}
+.date {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 130%;
+  text-transform: lowercase;
+
+  color: #000000;
+}
+.picker {
+  width: 37px;
+  height: 56px;
+  display: flex;
+  flex-direction: column;
+  margin-top: auto;
+  margin-bottom: 0;
+  outline: 0;
+  border: 0;
+  background-color: transparent;
+  cursor: pointer;
+}
+.activePicker {
+  width: 37px;
+  height: 56px;
+  display: flex;
+  flex-direction: column;
+  margin-top: auto;
+  margin-bottom: 0;
+  outline: 0;
+  border: 0;
+  cursor: pointer;
+  background-color: #000000;
+  color: white;
+  align-items: center;
+}
+.activePicker p {
+  color: white;
+  text-align: center;
+}

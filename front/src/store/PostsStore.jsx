@@ -12,6 +12,7 @@ export class PostsStore {
   singlePostIsLiked = "";
   urlImage = "";
   postSlider = [];
+  datePosts = [];
   constructor() {
     makeAutoObservable(this);
   }
@@ -46,6 +47,15 @@ export class PostsStore {
       console.log("error");
     }
     console.log(this.postSlider);
+  };
+  getPostDate = async () => {
+    const response = await axiosConfig().get(`posts/?per_page=999&page=1`);
+    if (response.status === 200) {
+      const { posts } = response.data;
+      this.datePosts = posts;
+    } else {
+      console.log("error");
+    }
   };
   getSinglePost = async (id) => {
     const response = await axiosConfig().get(`posts/${id}/`);
@@ -103,6 +113,9 @@ export class PostsStore {
     } else {
       alert("Войдите в аккаунт!");
     }
+  };
+  setPosts = (posts) => {
+    this.posts = posts;
   };
   datePost = (datePost) => {
     const date = new Date(datePost);

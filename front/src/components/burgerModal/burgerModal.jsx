@@ -38,7 +38,7 @@ const BurgerModal = ({ visible }) => {
             />
           </svg>
         </NavLink>
-        <NavLink className={classes.navigation} to="/">
+        <NavLink className={classes.navigation} to="/events">
           <p>афиша</p>
           <svg
             width="27"
@@ -56,7 +56,7 @@ const BurgerModal = ({ visible }) => {
             />
           </svg>
         </NavLink>
-        <NavLink className={classes.navigation} to="/dada">
+        {/* <NavLink className={classes.navigation} to="/dada">
           <p>обсуждения</p>
           <svg
             width="27"
@@ -73,7 +73,7 @@ const BurgerModal = ({ visible }) => {
               strokeLinejoin="round"
             />
           </svg>
-        </NavLink>
+        </NavLink> */}
         {store.user.isAuthenticated ? (
           <button
             className={classes.navigation_btn}
