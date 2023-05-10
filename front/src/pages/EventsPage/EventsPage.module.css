@@ -21,6 +21,10 @@
   max-width: 905px;
   margin-bottom: 90px;
 }
+.calendar {
+  width: 100px;
+  height: 50px;
+}
 @media (max-width: 1440px) {
   .wrapper {
     padding: 0 60px;
