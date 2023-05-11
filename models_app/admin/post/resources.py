@@ -20,7 +20,7 @@ class PostAdmin(admin.ModelAdmin):
         "image",
         "user",
     ]
-    readonly_fields = ["id", "created_at", "updated_at", "date"]
+    readonly_fields = ["id", "created_at", "updated_at"]
     list_display_links = (
         "id",
         "title",
