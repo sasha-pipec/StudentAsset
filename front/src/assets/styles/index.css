@@ -21,6 +21,7 @@ code {
   box-sizing: border-box;
 }
 .postlist {
+  margin-top: 50px;
   display: grid;
   row-gap: 48px;
   column-gap: 30px;
@@ -29,6 +30,19 @@ code {
   grid-auto-columns: minmax(0px, 420px);
   grid-auto-rows: minmax(0px, 420px);
   width: 100%;
+}
+
+.swiper-button-disabled {
+  opacity: 0;
+}
+.swiper {
+  min-height: 105px;
+}
+.swiper-wrapper {
+  display: flex;
+}
+.swiper-initialized {
+  overflow: hidden;
 }
 @media (max-width: 1440px) {
   .postlist {

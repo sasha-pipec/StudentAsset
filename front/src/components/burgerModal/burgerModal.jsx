@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import classes from "./burgerModal.module.css";
 import { NavLink } from "react-router-dom";
-import "./burgerModal.css";
+// import "./burgerModal.css";
 import store from "../../store/store";
 const BurgerModal = ({ visible }) => {
   const rootCl = [classes.wrapper];
