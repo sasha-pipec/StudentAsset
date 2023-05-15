@@ -1,16 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import classes from "./DatePicker.module.css";
 import store from "../../store/store";
 import { observer } from "mobx-react-lite";
 const DatePicker = observer(({ disabled, id, date }) => {
   const [picked, setPicked] = useState(false);
+
   const [currentPostList, setCurrentPostList] = useState([]);
   const month = date.toLocaleString("default", { month: "long" });
   const dayOfWeek = date.toLocaleDateString("default", { weekday: "short" });
   const dayIndex = date.getDay();
   const isWeekend = dayIndex === 0 || dayIndex === 6;
-  const boolDisabled = disabled ? true : false;
   const picker = () => {
     if (picked === false) {
       setPicked(true);
@@ -25,11 +25,18 @@ const DatePicker = observer(({ disabled, id, date }) => {
       postsArr.push(post);
       store.posts.setPosts(postsArr);
       console.log(postsArr);
+      store.PickedDate.setPickedId(id);
     } else {
       setPicked(false);
       store.posts.setPosts(currentPostList);
     }
   };
+
+  useEffect(() => {
+    if (store.PickedDate.pickedId === id) {
+      setPicked(true);
+    } else setPicked(false);
+  }, [store.PickedDate.pickedId]);
 
   return (
     <button

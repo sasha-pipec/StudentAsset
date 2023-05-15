@@ -5,14 +5,14 @@ import classes from "./Layout.module.css";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import Loginmodal from "../loginmodal/Loginmodal";
 import { observer } from "mobx-react-lite";
-import "./Layout.css";
+// import "./Layout.css";
 import UserModal from "../modal/UserModal";
 import logo from "../../assets/images/logo_footer.svg";
 import burgerLogo from "../../assets/images/burger_logo.svg";
 import burgerClose from "../../assets/images/burger_close.svg";
 import store from "../../store/store";
 import BurgerModal from "../burgerModal/burgerModal";
-const Layout = observer(() => {
+const Layout = observer(({ children }) => {
   return (
     <>
       <header className={classes.header}>

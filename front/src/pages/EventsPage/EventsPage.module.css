@@ -27,9 +27,22 @@
 }
 .disable {
   opacity: 0.6;
+  max-width: 37px;
 }
 .active {
   opacity: 1;
+  max-width: 37px;
+}
+.calendarMonth {
+  max-width: 37px;
+  position: relative;
+  opacity: 1;
+}
+.calendarMonthLast {
+  margin-left: 100px;
+}
+.swiper-slide {
+  max-width: 37px;
 }
 @media (max-width: 1440px) {
   .wrapper {
