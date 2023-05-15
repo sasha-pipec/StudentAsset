@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
 import classes from "./burgerModal.module.css";
-import { NavLink } from "react-router-dom";
 // import "./burgerModal.css";
 import store from "../../store/store";
+import Link from "next/link";
+import { useRouter } from "next/router";
 const BurgerModal = ({ visible }) => {
   const rootCl = [classes.wrapper];
+  const { pathname } = useRouter();
   if (visible) {
     rootCl.push(classes.active);
   }
@@ -20,7 +22,11 @@ const BurgerModal = ({ visible }) => {
       className={rootCl.join(" ")}
       onClick={() => store.modal.setVisibleBurger(false)}>
       <nav className={classes.nav_container}>
-        <NavLink className={classes.navigation} to="/vote">
+        <Link
+          className={
+            pathname === "/vote" ? classes.activeNavigation : classes.navigation
+          }
+          href="/vote">
           <p>голосование</p>
           <svg
             width="27"
@@ -37,8 +43,14 @@ const BurgerModal = ({ visible }) => {
               strokeLinejoin="round"
             />
           </svg>
-        </NavLink>
-        <NavLink className={classes.navigation} to="/events">
+        </Link>
+        <Link
+          className={
+            pathname === "/events"
+              ? classes.activeNavigation
+              : classes.navigation
+          }
+          href="/events">
           <p>афиша</p>
           <svg
             width="27"
@@ -55,7 +67,7 @@ const BurgerModal = ({ visible }) => {
               strokeLinejoin="round"
             />
           </svg>
-        </NavLink>
+        </Link>
         {/* <NavLink className={classes.navigation} to="/dada">
           <p>обсуждения</p>
           <svg

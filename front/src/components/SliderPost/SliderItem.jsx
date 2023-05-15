@@ -1,7 +1,7 @@
 import React from "react";
 import classes from "./Slider.module.css";
 import store from "../../store/store";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 export const SliderItem = ({ img, title, date, to }) => {
   let url = `http://api.connect.tgiek.ru${img}`;
   const image = {
@@ -15,7 +15,7 @@ export const SliderItem = ({ img, title, date, to }) => {
   };
   return (
     <Link
-      to={`/posts/${to}`}
+      href="/"
       onClick={() => {
         window.scrollTo(0, 0);
       }}

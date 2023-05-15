@@ -2,7 +2,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import classes from "./Layout.module.css";
-import { Link, NavLink, Outlet } from "react-router-dom";
 import Loginmodal from "../loginmodal/Loginmodal";
 import { observer } from "mobx-react-lite";
 // import "./Layout.css";
@@ -12,20 +11,32 @@ import burgerLogo from "../../assets/images/burger_logo.svg";
 import burgerClose from "../../assets/images/burger_close.svg";
 import store from "../../store/store";
 import BurgerModal from "../burgerModal/burgerModal";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import Image from "next/image";
 const Layout = observer(({ children }) => {
+  const { pathname } = useRouter();
   return (
     <>
       <header className={classes.header}>
-        <Link className={classes.logo} to="/">
+        <Link className={classes.logo} href="/">
           Коннект
         </Link>
         <nav className={classes.nav_container}>
-          <NavLink className={classes.navigation} to="/vote">
+          <Link
+            className={
+              pathname === "/vote" ? classes.active : classes.navigation
+            }
+            href="/vote">
             голосование
-          </NavLink>
-          <NavLink className={classes.navigation} to="/events">
+          </Link>
+          <Link
+            className={
+              pathname === "/events" ? classes.active : classes.navigation
+            }
+            href="/events">
             афиша
-          </NavLink>
+          </Link>
         </nav>
         {store.user.isAuthenticated ? (
           <div className={classes.btn_container}>
@@ -52,7 +63,7 @@ const Layout = observer(({ children }) => {
             onClick={() => {
               store.modal.setVisibleBurger(false);
             }}>
-            <img src={burgerClose} alt="" />
+            <Image src={burgerClose} alt="" width={"100%"} height={"100%"} />
           </button>
         ) : (
           <button
@@ -60,13 +71,13 @@ const Layout = observer(({ children }) => {
             onClick={() => {
               store.modal.setVisibleBurger(true);
             }}>
-            <img src={burgerLogo} alt="" />
+            <Image src={burgerLogo} alt="" width={"100%"} height={"100%"} />
           </button>
         )}
       </header>
       <Loginmodal visible={store.modal.visible} />
       <BurgerModal visible={store.modal.burgervisible}></BurgerModal>
-      <Outlet />
+      {children}
       <footer className={classes.footer}>
         <div className={classes.footerContainer}>
           <div className={classes.footerLogo}>
@@ -76,12 +87,12 @@ const Layout = observer(({ children }) => {
             <div className={classes.footer_firstRow}>
               <div>
                 <p className={classes.footerLink__title}>события</p>
-                <NavLink className={classes.footerLink} to="/">
+                <Link className={classes.footerLink} href="/events">
                   ближайшие
-                </NavLink>
-                <NavLink className={classes.footerLink} to="/main">
+                </Link>
+                <Link className={classes.footerLink} href="/vote">
                   голосование
-                </NavLink>
+                </Link>
               </div>
               <div>
                 <p className={classes.footerLink__title}>контакты</p>
@@ -111,4 +122,4 @@ const Layout = observer(({ children }) => {
     </>
   );
 });
-export { Layout };
+export default Layout;

@@ -13,6 +13,7 @@ export class PostsStore {
   urlImage = "";
   postSlider = [];
   datePosts = [];
+  currentPosts = [];
   constructor() {
     makeAutoObservable(this);
   }
@@ -30,6 +31,7 @@ export class PostsStore {
       let arr_pages = page_data_new.split(",");
       this.pages = arr_pages;
       this.posts = posts;
+      this.currentPosts = posts;
       console.log("Посты получены");
     } else {
       console.log("error");
@@ -116,6 +118,9 @@ export class PostsStore {
   };
   setPosts = (posts) => {
     this.posts = posts;
+  };
+  setCurrentPosts = (posts) => {
+    this.currentPosts = posts;
   };
   datePost = (datePost) => {
     const date = new Date(datePost);

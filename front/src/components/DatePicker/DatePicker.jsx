@@ -11,11 +11,10 @@ const DatePicker = observer(({ disabled, id, date }) => {
   const dayOfWeek = date.toLocaleDateString("default", { weekday: "short" });
   const dayIndex = date.getDay();
   const isWeekend = dayIndex === 0 || dayIndex === 6;
-  const picker = () => {
+  const picker = (date) => {
     if (picked === false) {
       setPicked(true);
       setCurrentPostList(store.posts.posts);
-
       let post = store.posts.datePosts.find((post) => {
         const postDate = new Date(post.date);
         const targetDate = new Date(date);
@@ -28,7 +27,7 @@ const DatePicker = observer(({ disabled, id, date }) => {
       store.PickedDate.setPickedId(id);
     } else {
       setPicked(false);
-      store.posts.setPosts(currentPostList);
+      store.posts.setPosts(store.posts.currentPosts);
     }
   };
 
@@ -43,7 +42,7 @@ const DatePicker = observer(({ disabled, id, date }) => {
       className={picked ? classes.activePicker : classes.picker}
       disabled={!disabled}
       onClick={() => {
-        picker();
+        picker(date);
       }}>
       <p className={isWeekend ? classes.weekend : classes.weekday}>
         {dayOfWeek}

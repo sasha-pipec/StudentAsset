@@ -31,18 +31,21 @@ code {
   grid-auto-rows: minmax(0px, 420px);
   width: 100%;
 }
-
+.swiper-button-prev {
+  width: 20px;
+  height: 20px;
+  background-color: blue;
+}
+.swiper-button-next {
+  width: 20px;
+  height: 20px;
+  background-color: blue;
+}
 .swiper-button-disabled {
   opacity: 0;
 }
 .swiper {
   min-height: 105px;
-}
-.swiper-wrapper {
-  display: flex;
-}
-.swiper-initialized {
-  overflow: hidden;
 }
 @media (max-width: 1440px) {
   .postlist {
