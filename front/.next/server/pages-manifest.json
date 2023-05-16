@@ -2,7 +2,8 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/events": "pages/events.js",
-  "/": "pages/index.js",
-  "/vote": "pages/vote.js"
+  "/events": "pages/events.html",
+  "/": "pages/index.html",
+  "/vote": "pages/vote.html",
+  "/404": "pages/404.html"
 }

@@ -1,9 +1,13 @@
 import Layout from "@/components/Layout/Layout";
 import store from "@/store/store";
 import "@/styles/globals.css";
+import { useEffect } from "react";
 
 export default function App({ Component, pageProps }) {
-  store.user.auth();
+  useEffect(() => {
+    store.user.auth();
+  }, []);
+
   return (
     <Layout>
       <Component {...pageProps} />
