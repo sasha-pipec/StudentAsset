@@ -8,10 +8,11 @@ import { Navigation } from "swiper";
 
 import DatePicker from "../../components/DatePicker/DatePicker";
 import { Layout } from "../../components/Layout/Layout";
+import EventPageSkeleton from "@/components/EventPageSkeleton/EventPageSkeleton";
 
 const EventsPage = observer(() => {
   const [calendar, setCalendar] = useState([]);
-
+  const [isLoading, setIsLoading] = useState(true);
   async function createCalendarArray() {
     const today = new Date();
     const currentYear = today.getFullYear();
@@ -48,13 +49,13 @@ const EventsPage = observer(() => {
       });
     }
     setCalendar(calendarArray);
-
     return calendarArray;
   }
 
   const CreateCalendar = async () => {
     await store.posts.getPostDate();
     createCalendarArray();
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -62,110 +63,116 @@ const EventsPage = observer(() => {
     store.posts.singlePostIsLiked = "";
   }, []);
   console.log(calendar);
-
+  console.log(store.posts.isLoading);
   return (
-    <div className={classes.wrapper}>
-      <div>
-        <h1 className={classes.title}>БЛИЖАЙШИЕ СОБЫТИЯ</h1>
-      </div>
-      {calendar.length !== 0 && (
-        <>
-          <Swiper
-            spaceBetween={10}
-            slidesPerView={"auto"}
-            height={100}
-            modules={[Navigation]}
-            navigation={true}>
-            {calendar.map((month, monthIndex) =>
-              month.days.map((day, dayIndex) => {
-                const findEvent = store.posts.datePosts.find((elem) => {
-                  let elemDate = new Date(elem.date);
+    <>
+      {isLoading === false ? (
+        <div className={classes.wrapper}>
+          <div>
+            <h1 className={classes.title}>БЛИЖАЙШИЕ СОБЫТИЯ</h1>
+          </div>
+          {calendar.length !== 0 && (
+            <div className={classes.swiper}>
+              <Swiper
+                spaceBetween={10}
+                slidesPerView={"auto"}
+                height={100}
+                modules={[Navigation]}
+                navigation={true}>
+                {calendar.map((month, monthIndex) =>
+                  month.days.map((day, dayIndex) => {
+                    const findEvent = store.posts.datePosts.find((elem) => {
+                      let elemDate = new Date(elem.date);
 
-                  if (
-                    elemDate.getDate() === day.date.getDate() &&
-                    elemDate.getMonth() === day.date.getMonth()
-                  ) {
-                    console.log(elem.date, new Date(elem.date));
-                    console.log(day.date, day.date.getDate());
-                    return true;
-                  }
-                  return false;
-                });
-                console.log(findEvent);
-                // console.log(dayIndex);
-                if (month.days.length === dayIndex - 1) {
-                  console.log(dayIndex - 1, day);
-                }
-                if (dayIndex === 0) {
-                  console.log(
-                    "daddadad",
-                    day.date.toLocaleString("default", { month: "long" }),
-                    day,
-                  );
-                }
-                return (
-                  <SwiperSlide
-                    style={
-                      month.days.length === dayIndex + 1
-                        ? findEvent
-                          ? {
-                              height: "86px",
-                              minWidth: "100px",
-                              display: "flex",
-                              flexDirection: "column",
-                              gap: "10px",
-                            }
-                          : {
-                              height: "86px",
-                              minWidth: "100px",
-                              display: "flex",
-                              flexDirection: "column",
-                              gap: "10px",
-                              opacity: 0.6,
-                            }
-                        : findEvent
-                        ? {
-                            height: "86px",
-                            maxWidth: "31px",
-                            display: "flex",
-                            flexDirection: "column",
-                            gap: "10px",
-                          }
-                        : {
-                            height: "86px",
-                            maxWidth: "31px",
-                            display: "flex",
-                            flexDirection: "column",
-                            gap: "10px",
-                            opacity: 0.6,
-                          }
+                      if (
+                        elemDate.getDate() === day.date.getDate() &&
+                        elemDate.getMonth() === day.date.getMonth()
+                      ) {
+                        console.log(elem.date, new Date(elem.date));
+                        console.log(day.date, day.date.getDate());
+                        return true;
+                      }
+                      return false;
+                    });
+                    console.log(findEvent);
+                    // console.log(dayIndex);
+                    if (month.days.length === dayIndex - 1) {
+                      console.log(dayIndex - 1, day);
                     }
-                    className={findEvent ? classes.active : classes.disable}
-                    key={`${monthIndex}-${dayIndex}`}>
-                    {dayIndex === 0 ? (
-                      <p className={classes.calendarMonth}>
-                        {day.date.toLocaleString("default", {
-                          month: "long",
-                        })}
-                      </p>
-                    ) : (
-                      ""
-                    )}
-                    <DatePicker
-                      disabled={findEvent}
-                      id={day.date}
-                      date={day.date}
-                    />
-                  </SwiperSlide>
-                );
-              }),
-            )}
-          </Swiper>
-        </>
-      )}
+                    if (dayIndex === 0) {
+                      console.log(
+                        "daddadad",
+                        day.date.toLocaleString("default", { month: "long" }),
+                        day,
+                      );
+                    }
+                    return (
+                      <SwiperSlide
+                        style={
+                          month.days.length === dayIndex + 1
+                            ? findEvent
+                              ? {
+                                  height: "86px",
+                                  minWidth: "100px",
+                                  display: "flex",
+                                  flexDirection: "column",
+                                  gap: "10px",
+                                }
+                              : {
+                                  height: "86px",
+                                  minWidth: "100px",
+                                  display: "flex",
+                                  flexDirection: "column",
+                                  gap: "10px",
+                                  opacity: 0.6,
+                                }
+                            : findEvent
+                            ? {
+                                height: "86px",
+                                maxWidth: "31px",
+                                display: "flex",
+                                flexDirection: "column",
+                                gap: "10px",
+                              }
+                            : {
+                                height: "86px",
+                                maxWidth: "31px",
+                                display: "flex",
+                                flexDirection: "column",
+                                gap: "10px",
+                                opacity: 0.6,
+                              }
+                        }
+                        className={findEvent ? classes.active : classes.disable}
+                        key={`${monthIndex}-${dayIndex}`}>
+                        {dayIndex === 0 ? (
+                          <p className={classes.calendarMonth}>
+                            {day.date.toLocaleString("default", {
+                              month: "long",
+                            })}
+                          </p>
+                        ) : (
+                          ""
+                        )}
+                        <DatePicker
+                          disabled={findEvent}
+                          id={day.date}
+                          date={day.date}
+                        />
+                      </SwiperSlide>
+                    );
+                  }),
+                )}
+              </Swiper>
+            </div>
+          )}
 
-      <PostList></PostList>
-    </div>
+          <PostList></PostList>
+        </div>
+      ) : (
+        <EventPageSkeleton></EventPageSkeleton>
+      )}
+    </>
   );
 });
 export default EventsPage;

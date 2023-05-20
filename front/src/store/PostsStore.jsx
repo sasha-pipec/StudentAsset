@@ -14,10 +14,12 @@ export class PostsStore {
   postSlider = [];
   datePosts = [];
   currentPosts = [];
+  isLoading = "";
   constructor() {
     makeAutoObservable(this);
   }
   getPosts = async (page) => {
+    this.isLoading = true;
     this.CurrentPage = page;
     const response = await axiosConfig().get(`posts/?per_page=12&page=${page}`);
     if (response.status === 200) {
@@ -32,6 +34,7 @@ export class PostsStore {
       this.pages = arr_pages;
       this.posts = posts;
       this.currentPosts = posts;
+      this.isLoading = false;
       console.log("Посты получены");
     } else {
       console.log("error");
@@ -135,5 +138,8 @@ export class PostsStore {
       .padStart(2, "0")}`;
     const formattedDateTime = `${formattedDate} / ${formattedTime}`;
     return formattedDateTime;
+  };
+  setIsLoading = (value) => {
+    this.isLoading = value;
   };
 }

@@ -24,7 +24,7 @@ export const PostItem = ({ index, img, title, date, to }) => {
 
   return (
     // to={`/posts/${to}`}
-    <Link href="/" className={rootCl.join(" ")}>
+    <Link href={`/events/${to}`} className={rootCl.join(" ")}>
       <div className={classes.imageBackground}>
         <div className={classes.image} style={image}></div>
       </div>

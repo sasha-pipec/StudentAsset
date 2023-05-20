@@ -1,0 +1,164 @@
+.wrapper {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 60px;
+}
+.main {
+  display: flex;
+  gap: 40px;
+  margin-bottom: 100px;
+}
+.title {
+}
+.date {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 140%;
+  text-transform: lowercase;
+  color: #161a14;
+  margin: 0;
+  margin-bottom: 20px;
+}
+.titleContainer {
+  width: 49.4%;
+  height: 524px;
+}
+.title {
+  font-weight: 400;
+  font-size: 64px;
+  line-height: 110%;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  color: #000000;
+  margin: 0;
+  margin-bottom: 50px;
+}
+.description {
+  max-width: 410px;
+  margin: 0;
+  margin-bottom: 100px;
+}
+.imageBackground {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 660px;
+}
+.imageContainer {
+  width: 39.4%;
+}
+.image {
+  height: 100%;
+  width: auto;
+  transition: transform 0.2s ease-in-out;
+  margin-left: -20%;
+}
+.imageBackground::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 0.2;
+  z-index: 1;
+}
+
+.imageBackground:hover img {
+  transform: scale(1.2);
+}
+
+@media (max-width: 1000px) {
+  .title {
+    font-size: 42px;
+    width: 100%;
+    height: 100px;
+  }
+  .titleContainer {
+    width: 49.4%;
+  }
+  .imageContainer {
+    width: 45.4%;
+    overflow: hidden;
+  }
+  .imageBackground,
+  .imageBackground::before {
+    width: 454px;
+    height: 545px;
+  }
+  .description,
+  .date {
+    font-size: 14px;
+  }
+  .main {
+    justify-content: space-between;
+  }
+}
+@media (max-width: 768px) {
+  .imageBackground,
+  .imageBackground::before {
+    width: 369px;
+    height: 443px;
+  }
+  .imageContainer {
+    width: 50%;
+  }
+  .titleContainer {
+    width: 40.4%;
+    height: 356px;
+  }
+  .title {
+    font-size: 26px;
+    width: 100%;
+    height: 62px;
+    margin-bottom: 40px;
+  }
+  .description,
+  .date {
+    font-size: 12px;
+  }
+  .description {
+    margin-bottom: 70px;
+  }
+}
+@media (max-width: 500px) {
+  .imageBackground,
+  .imageBackground::before {
+    width: 100%;
+  }
+  .imageContainer {
+    width: 100%;
+    height: 450px;
+  }
+  .titleContainer {
+    width: 100%;
+    height: 356px;
+    padding: 50px 40px;
+  }
+  .title {
+    font-size: 26px;
+    width: 100%;
+    height: 62px;
+    margin-bottom: 40px;
+  }
+  .description,
+  .date {
+    font-size: 12px;
+  }
+  .description {
+    margin-bottom: 50px;
+  }
+  .main {
+    flex-direction: column;
+    gap: 0px;
+  }
+  .wrapper {
+    padding: 0px;
+  }
+}
+@media (max-width: 360px) {
+  .titleContainer {
+    padding: 40px 30px;
+  }
+}

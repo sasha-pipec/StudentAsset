@@ -241,7 +241,7 @@ module.exports = import("axios");;
 var __webpack_require__ = require("../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [893,636,61,53,740], () => (__webpack_exec__(8375)));
+var __webpack_exports__ = __webpack_require__.X(0, [893,664,636,675,53,740], () => (__webpack_exec__(8375)));
 module.exports = __webpack_exports__;
 
 })();

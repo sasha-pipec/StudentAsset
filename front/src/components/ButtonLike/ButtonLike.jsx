@@ -1,12 +1,15 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from "react";
 import classes from "./ButtonLike.module.css";
 import { observer } from "mobx-react-lite";
 import store from "../../store/store";
 export const ButtonLike = observer(({ id }) => {
+  let token;
   useEffect(() => {
     if (store.user.isAuthenticated) {
       store.likeToggle.setLike(store.posts.singlePostIsLiked);
     }
+    token = localStorage.getItem("token");
   }, [id]);
 
   const handleLike = async () => {
@@ -24,7 +27,6 @@ export const ButtonLike = observer(({ id }) => {
       alert("Войдите в аккаунт!");
     }
   };
-  const token = localStorage.getItem("token");
   if (
     store.posts.singlePostIsLiked === true ||
     store.posts.singlePostIsLiked === false ||

@@ -97,7 +97,9 @@ class PostsStore {
         this.postSlider = [];
         this.datePosts = [];
         this.currentPosts = [];
+        this.isLoading = "";
         this.getPosts = async (page)=>{
+            this.isLoading = true;
             this.CurrentPage = page;
             const response = await (0,_utils_axiosConfig__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z)().get(`posts/?per_page=12&page=${page}`);
             if (response.status === 200) {
@@ -107,6 +109,7 @@ class PostsStore {
                 this.pages = arr_pages;
                 this.posts = posts;
                 this.currentPosts = posts;
+                this.isLoading = false;
                 console.log("Посты получены");
             } else {
                 console.log("error");
@@ -197,6 +200,9 @@ class PostsStore {
             const formattedTime = `${date.getHours().toString().padStart(2, "0")}:${date.getMinutes().toString().padStart(2, "0")}`;
             const formattedDateTime = `${formattedDate} / ${formattedTime}`;
             return formattedDateTime;
+        };
+        this.setIsLoading = (value)=>{
+            this.isLoading = value;
         };
         (0,mobx__WEBPACK_IMPORTED_MODULE_0__.makeAutoObservable)(this);
     }
