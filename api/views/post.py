@@ -20,6 +20,7 @@ class PostCreateListView(APIView):
                 "posts": PostShowSerializer(outcome.result.get('object_list'), many=True).data,
                 'page_data': outcome.result.get('page_range'),
                 'page_info': outcome.result.get('page_info'),
+                'date': outcome.result.get("date")
             },
             status=status.HTTP_200_OK
         )
