@@ -11,6 +11,9 @@ export const ButtonLike = observer(({ id }) => {
     }
     token = localStorage.getItem("token");
   }, [id]);
+  useEffect(() => {
+    store.posts.getSinglePost(id);
+  }, [store.user.isAuthenticated]);
 
   const handleLike = async () => {
     if (store.user.isAuthenticated) {
@@ -24,24 +27,23 @@ export const ButtonLike = observer(({ id }) => {
         console.log("ЛАЙК");
       }
     } else {
-      alert("Войдите в аккаунт!");
+      store.modal.setVisible(true);
     }
   };
-  if (
-    store.posts.singlePostIsLiked === true ||
-    store.posts.singlePostIsLiked === false ||
-    token === null
-  ) {
-    return (
-      <>
+
+  return (
+    <>
+      {store.user.isAuthenticated ? (
         <button
           className={store.likeToggle.isLiked ? classes.like : classes.dislike}
           onClick={handleLike}>
           {store.likeToggle.isLiked ? "Передумал" : "хочу пойти"}
         </button>
-      </>
-    );
-  } else {
-    console.log(store.posts.singlePostIsLiked);
-  }
+      ) : (
+        <button className={classes.dislike} onClick={handleLike}>
+          {"хочу пойти"}
+        </button>
+      )}
+    </>
+  );
 });

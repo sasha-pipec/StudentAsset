@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import classes from "../../styles/pages/SinglePostPage.module.css";
 import { observer } from "mobx-react-lite";
@@ -13,6 +13,7 @@ const SinglePostPage = observer(() => {
   const { id } = router.query;
   useEffect(() => {
     const getPost = async () => {
+      store.posts.singlePost = [];
       const { id } = router.query;
       if (id !== undefined) {
         await store.posts.getSinglePost(id);
@@ -35,8 +36,7 @@ const SinglePostPage = observer(() => {
     <>
       <div>
         <div className={classes.wrapper}>
-          {store.posts.singlePost.date !== undefined &&
-          store.posts.singlePostIsLiked !== "" ? (
+          {store.posts.singlePost.date !== undefined ? (
             <div className={classes.main}>
               <div className={classes.imageContainer}>
                 <div className={classes.imageBackground}>

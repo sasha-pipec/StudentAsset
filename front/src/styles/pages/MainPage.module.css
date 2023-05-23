@@ -43,7 +43,6 @@
   letter-spacing: -0.04em;
   text-transform: uppercase;
   color: #000000;
-  margin-bottom: 50px;
 }
 .slider {
   width: 1440px;
@@ -119,5 +118,16 @@
   text-transform: uppercase;
 
   color: #000000;
+}
+
+.navTitle {
+  display: flex;
+  text-decoration: none;
+  align-items: center;
   margin-bottom: 50px;
+  gap: 20px;
+}
+.navTitle img {
+  height: 50px;
+  width: 50px;
 }

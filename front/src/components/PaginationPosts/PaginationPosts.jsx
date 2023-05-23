@@ -3,23 +3,36 @@ import classes from "./PaginationPosts.module.css";
 import imgPrev from "../../assets/images/arrow_prev.svg";
 import imgNext from "../../assets/images/arrow_next.svg";
 import store from "../../store/store";
+import Image from "next/image";
 export const PaginationPosts = () => {
   const pageCount = store.posts.pages.length;
-  const handleClick = (page) => {
-    store.posts.getPosts(page);
-  };
-  const handlePrevClick = () => {
-    const page = store.posts.CurrentPage > 1 ? store.posts.CurrentPage - 1 : 1;
-    store.posts.getPosts(page);
+
+  const handleClick = async (page) => {
+    store.posts.isLoading = true;
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    await store.posts.getPosts(page);
+    store.posts.isLoading = false;
   };
 
-  const handleNextClick = () => {
+  const handlePrevClick = async () => {
+    const page = store.posts.CurrentPage > 1 ? store.posts.CurrentPage - 1 : 1;
+    store.posts.isLoading = true;
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    await store.posts.getPosts(page);
+    store.posts.isLoading = false;
+  };
+
+  const handleNextClick = async () => {
     const page =
       store.posts.CurrentPage < pageCount
         ? store.posts.CurrentPage + 1
         : pageCount;
-    store.posts.getPosts(page);
+    store.posts.isLoading = true;
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    await store.posts.getPosts(page);
+    store.posts.isLoading = false;
   };
+
   const pages = [];
   for (let i = 1; i <= pageCount; i++) {
     //доделать компонент
@@ -32,14 +45,15 @@ export const PaginationPosts = () => {
       </button>,
     );
   }
+
   return (
     <div className={classes.navigation_bar}>
       <button onClick={handlePrevClick} className={classes.navigation_arrow}>
-        <img src={imgPrev} alt="prev" />
+        <Image src={imgPrev} alt="" />
       </button>
       <div className={classes.navigation_btns}>{pages}</div>
       <button onClick={handleNextClick} className={classes.navigation_arrow}>
-        <img src={imgNext} alt="next" />
+        <Image src={imgNext} alt="" />
       </button>
     </div>
   );

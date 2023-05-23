@@ -5,12 +5,6 @@ import { PaginationPosts } from "../PaginationPosts/PaginationPosts";
 import store from "../../store/store";
 
 export const PostList = observer(() => {
-  let page = 1;
-  useEffect(() => {
-    store.posts.getPosts(page);
-    store.posts.singlePost = [];
-    store.posts.singlePostIsLiked = undefined;
-  }, []);
   return (
     <>
       <div className="postlist">

@@ -90,12 +90,12 @@ body {
 .postlist {
   margin-top: 50px;
   display: grid;
-  row-gap: 48px;
+  row-gap: 40px;
   column-gap: 30px;
   justify-items: stretch;
   align-items: stretch;
   grid-auto-columns: minmax(0px, 420px);
-  grid-auto-rows: minmax(0px, 420px);
+  grid-auto-rows: minmax(0px, 436px);
   width: 100%;
 }
 .swiper-wrapper {

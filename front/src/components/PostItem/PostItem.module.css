@@ -47,7 +47,7 @@
 .bigItem div,
 .bigItem_2 div {
   max-width: 870px;
-  height: 800px;
+  height: 808px;
 }
 .bigItem_2 {
   display: flex;
@@ -62,7 +62,7 @@
   position: relative;
   overflow: hidden;
   width: 100%;
-  height: 100%;
+  height: 332px;
 }
 .imageBackground::before {
   content: "";
@@ -114,7 +114,7 @@
     height: 29px;
   }
   .imageBackground {
-    height: 178px;
+    min-height: 178px;
   }
 }
 @media (max-width: 480px) {

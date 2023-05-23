@@ -5,11 +5,17 @@ import store from "../../store/store";
 import { observer } from "mobx-react-lite";
 const DatePicker = observer(({ disabled, id, date }) => {
   const [picked, setPicked] = useState(false);
-
+  useEffect(() => {
+    setPicked(false);
+    store.PickedDate.pickedId = "";
+  }, []);
+  const DateStamp = new Date(date);
   const [currentPostList, setCurrentPostList] = useState([]);
-  const month = date.toLocaleString("default", { month: "long" });
-  const dayOfWeek = date.toLocaleDateString("default", { weekday: "short" });
-  const dayIndex = date.getDay();
+  const month = DateStamp.toLocaleString("default", { month: "long" });
+  const dayOfWeek = DateStamp.toLocaleDateString("default", {
+    weekday: "short",
+  });
+  const dayIndex = DateStamp.getDay();
   const isWeekend = dayIndex === 0 || dayIndex === 6;
   const picker = (date) => {
     if (picked === false) {
@@ -42,12 +48,12 @@ const DatePicker = observer(({ disabled, id, date }) => {
       className={picked ? classes.activePicker : classes.picker}
       disabled={!disabled}
       onClick={() => {
-        picker(date);
+        picker(DateStamp);
       }}>
       <p className={isWeekend ? classes.weekend : classes.weekday}>
         {dayOfWeek}
       </p>
-      <p className={classes.date}>{date.getDate()}</p>
+      <p className={classes.date}>{DateStamp.getDate()}</p>
     </button>
   );
 });

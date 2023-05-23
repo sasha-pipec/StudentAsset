@@ -7,34 +7,33 @@ configure({
 export class PostsStore {
   posts = [];
   pages = [];
-  CurrentPage = "";
-  singlePost = [];
-  singlePostIsLiked = "";
-  urlImage = "";
   postSlider = [];
   datePosts = [];
   currentPosts = [];
+  singlePost = [];
+  CurrentPage = "";
+  calendar = [];
+  singlePostIsLiked = "";
+  urlImage = "";
   isLoading = "";
   constructor() {
     makeAutoObservable(this);
   }
   getPosts = async (page) => {
-    this.isLoading = true;
     this.CurrentPage = page;
     const response = await axiosConfig().get(`posts/?per_page=12&page=${page}`);
     if (response.status === 200) {
-      const { posts, page_data } = response.data;
+      const { posts, page_data, date } = response.data;
       let page_data_new = page_data
         .replace(/[/"]/g, "")
         .replace("[", "")
         .replace("]", "")
         .replace(/[ ]/g, "");
-
       let arr_pages = page_data_new.split(",");
       this.pages = arr_pages;
       this.posts = posts;
       this.currentPosts = posts;
-      this.isLoading = false;
+      this.calendar = date;
       console.log("Посты получены");
     } else {
       console.log("error");

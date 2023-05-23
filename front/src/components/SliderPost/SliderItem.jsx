@@ -15,7 +15,7 @@ export const SliderItem = ({ img, title, date, to }) => {
   };
   return (
     <Link
-      href="/"
+      href={`/events/${to}`}
       onClick={() => {
         window.scrollTo(0, 0);
       }}

@@ -167,10 +167,6 @@
   .active {
     font-size: 14px;
   }
-  .footer_firstRowm *,
-  .footer_secondRow * {
-    font-size: 14px;
-  }
   .footerContainer {
     gap: 140px;
     height: 386px;
@@ -221,7 +217,7 @@
   }
 }
 @media (max-width: 400px) {
-  .footer img {
-    width: 280px;
+  .footer svg {
+    width: 100%;
   }
 }

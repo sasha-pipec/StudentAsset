@@ -21,7 +21,7 @@ export const EventItem = ({
       setVisible(false);
       store.vote.likeEvent(index, data);
     } else {
-      alert("войдите в аккаунт!");
+      store.modal.setVisible(true);
     }
   }
 

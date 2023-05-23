@@ -52,7 +52,7 @@ export const CreateEvent = () => {
   };
   return (
     <div className={classes.wrapper}>
-      <div>
+      <div className={classes.text}>
         <p className={classes.title}>Есть идея для мероприятия?</p>
         <p className={classes.subTitle}>
           Поделитесь ею с нами, мы рассмотрим ваше предложение и, возможно,
