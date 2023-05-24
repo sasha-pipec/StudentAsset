@@ -160,12 +160,12 @@ const Layout = (0,mobx_react_lite__WEBPACK_IMPORTED_MODULE_3__.observer)(({ chil
                         children: [
                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_9___default()), {
                                 className: pathname === "/vote" ? (_Layout_module_css__WEBPACK_IMPORTED_MODULE_12___default().active) : (_Layout_module_css__WEBPACK_IMPORTED_MODULE_12___default().navigation),
-                                href: "/vote",
+                                href: "vote",
                                 children: "голосование"
                             }),
                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_9___default()), {
                                 className: pathname === "/events" ? (_Layout_module_css__WEBPACK_IMPORTED_MODULE_12___default().active) : (_Layout_module_css__WEBPACK_IMPORTED_MODULE_12___default().navigation),
-                                href: "/events",
+                                href: "events",
                                 children: "афиша"
                             })
                         ]

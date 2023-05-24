@@ -25,14 +25,14 @@ const Layout = observer(({ children }) => {
             className={
               pathname === "/vote" ? classes.active : classes.navigation
             }
-            href="/vote">
+            href="vote">
             голосование
           </Link>
           <Link
             className={
               pathname === "/events" ? classes.active : classes.navigation
             }
-            href="/events">
+            href="events">
             афиша
           </Link>
         </nav>
