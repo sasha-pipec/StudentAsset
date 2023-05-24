@@ -3,7 +3,7 @@
   "/_error": "pages/_error.js",
   "/404": "pages/404.html",
   "/": "pages/index.html",
-  "/users": "pages/users.js",
   "/users/[id]": "pages/users/[id].js",
+  "/users": "pages/users.js",
   "/_document": "pages/_document.js"
 }
