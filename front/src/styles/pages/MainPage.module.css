@@ -192,7 +192,7 @@
 }
 @media (max-width: 768px) {
   .titleText {
-    font-size: 78px;
+    font-size: 58px;
   }
   .slider h2,
   .random .navTitle h2 {
@@ -234,7 +234,7 @@
 }
 @media (max-width: 480px) {
   .titleText {
-    font-size: 58px;
+    font-size: 42px;
   }
   .title {
     height: 537px;
