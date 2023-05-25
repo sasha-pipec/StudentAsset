@@ -28,7 +28,6 @@
   justify-content: center;
 }
 .titleText {
-  width: 870px;
   font-weight: 400;
   font-size: 120px;
   line-height: 110%;
@@ -62,6 +61,7 @@
   color: #ffffff;
   display: flex;
   flex-direction: column;
+  gap: 50px;
 }
 
 .answersTitle {
@@ -130,4 +130,158 @@
 .navTitle img {
   height: 50px;
   width: 50px;
+}
+
+@media (max-width: 1320px) {
+  .titleWrapper {
+    width: 100%;
+  }
+  .slider,
+  .random {
+    width: 100%;
+    padding: 60px;
+  }
+  .answers {
+    width: 100%;
+  }
+}
+
+@media (max-width: 1000px) {
+  .slider h2,
+  .random .navTitle h2 {
+    font-size: 42px;
+    line-height: 120%;
+  }
+  .navTitle img {
+    width: 30px;
+    height: 30px;
+  }
+  .navTitle {
+    gap: 20px;
+  }
+  .title {
+    height: 703px;
+  }
+
+  .answersTitle {
+    font-size: 42px;
+    line-height: 120%;
+  }
+
+  .accordion {
+    width: 100%;
+  }
+  .accordionHeader {
+    font-size: 20px;
+    line-height: 130%;
+  }
+  .accordionContentShow {
+    font-size: 14px;
+    line-height: 140%;
+  }
+  .answers {
+    padding-bottom: 80px;
+  }
+  .slider {
+    padding-top: 0;
+  }
+  .random {
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+}
+@media (max-width: 768px) {
+  .titleText {
+    font-size: 78px;
+  }
+  .slider h2,
+  .random .navTitle h2 {
+    font-size: 26px;
+    line-height: 120%;
+  }
+  .navTitle img {
+    width: 17px;
+    height: 17px;
+  }
+  .navTitle {
+    gap: 10px;
+  }
+  .title {
+    height: 637px;
+  }
+
+  .answers {
+    gap: 40px;
+  }
+  .accordionHeader {
+    font-size: 15px;
+    line-height: 140%;
+  }
+  .accordionContentShow {
+    font-size: 12px;
+    line-height: 110%;
+  }
+  .answers {
+    padding-bottom: 80px;
+  }
+  .slider {
+    padding-top: 0;
+  }
+  .random {
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+}
+@media (max-width: 480px) {
+  .titleText {
+    font-size: 58px;
+  }
+  .title {
+    height: 537px;
+  }
+
+  .title,
+  .slider,
+  .answers,
+  .random {
+    padding: 40px;
+  }
+  .random {
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+  .answers {
+    padding-bottom: 80px;
+  }
+  .slider {
+    padding-top: 0;
+  }
+}
+@media (max-width: 360px) {
+  .titleText {
+    font-size: 42px;
+  }
+  .title {
+    height: 537px;
+  }
+  .random {
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+  .title,
+  .slider,
+  .answers,
+  .random {
+    padding: 30px;
+  }
+  .answers {
+    padding-bottom: 80px;
+  }
+  .slider {
+    padding-right: 0;
+    padding-top: 0;
+  }
+  .slider .navTitle {
+    padding-right: 30px;
+  }
 }
